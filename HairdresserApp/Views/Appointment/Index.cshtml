@@ -1,13 +1,21 @@
 @using Entities.Models
 @model List<Worker>
 
+
 <div class="section-appointments">
   <h2 class="heading-fifth"> Avaliable Workers </h2>
   <div class="appointment-display">
     @foreach (var worker in Model)
     {
       <div class="appointment-box">
-        <h6 class="heading-sixth"> @worker.Name @worker.Surname</h6>
+        <div class="appointment-header">
+          <img src="/img/picpeople-filled.png" alt="worker-logo" class="appointment-logo" />
+          <h6 class="heading-sixth"> @worker.Name @worker.Surname</h6>
+        </div>
+
+        <div class="appointment-footer">
+          <a href="@Url.Action("Index", "Worker", new { workerId = worker.Id })" class="btn btn-outlined">Select</a>
+        </div>
       </div>
     }
   </div>

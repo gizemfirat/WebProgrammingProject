@@ -1,0 +1,24 @@
+@using Entities.Models;
+@model IEnumerable<AvaliableTime>
+
+
+<div class="section-appointments">
+  <h2 class="heading-fifth"> Avaliable Times </h2>
+  <div class="appointment-display">
+    @foreach (var time in Model)
+    {
+      var colorClass = time.IsAvaliable == 1 ? "avaliable" : "notAvaliable";
+      var img = time.IsAvaliable == 1 ? "/img/calendar-pen.png" : "/img/calendar-xmark.png";
+      <div class="appointment-box ">
+        <div class="appointment-header">
+          <img src="@img" alt="time-logo" class="appointment-logo" />
+          <h5 class="heading-sixth"> @time.Time.ToString("yyyy-MM-dd HH:mm")</h5>
+          <h5 class="heading-sixth dark">@(time.IsAvaliable == 1 ? "Avaliable" : "Not Avaliable")</h5>
+        </div>
+        <div class="appointment-footer">
+          <a href="#" class="btn btn-outlined">Select</a>
+        </div>
+      </div>
+    }
+  </div>
+</div>

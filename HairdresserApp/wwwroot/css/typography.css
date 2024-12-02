@@ -46,10 +46,19 @@
   letter-spacing: 0.3rem;
   font-weight: 500;
   color: var(--color-fourth-dark);
+  cursor: default;
+  transition: all .3s;
 
   &:hover {
-    transform: scale(1.005);
-    text-shadow: 3px 4px 7px rgba(0,0,0,0.20);
+    color: var(--color-fourth-darkest);
+  }
+}
+
+.heading-sixth {
+  font-size: 2rem;
+
+  &.dark {
+    color: var(--color-fourth-darkest);
   }
 }
 

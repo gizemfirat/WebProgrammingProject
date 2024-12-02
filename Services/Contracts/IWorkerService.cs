@@ -1,4 +1,5 @@
 using Entities.Models;
+using Microsoft.Identity.Client;
 
 namespace Services.Contracts
 {
@@ -11,5 +12,7 @@ namespace Services.Contracts
     void AddWorker(Worker worker);
     void DeleteWorker(Worker worker);
     void UpdateWorker(Worker worker);
+
+    IEnumerable<AvaliableTime> GetAvaliableTimesForWorker(int workerId, bool trackChanges);
   }
 }

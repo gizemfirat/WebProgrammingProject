@@ -41,5 +41,12 @@ namespace Repositories
             ? _context.Set<Worker>().Where(w => w.Profession == professionId).ToList()
             : _context.Set<Worker>().Where(w => w.Profession == professionId).AsNoTracking().ToList();
         }
+
+        public IEnumerable<AvaliableTime> GetAvaliableTimesForWorker(int workerId, bool trackChanges)
+        {
+          return trackChanges
+          ? _context.AvaliableTimes.Where(at => at.Worker == workerId).ToList()
+          : _context.AvaliableTimes.Where(at => at.Worker == workerId).AsNoTracking().ToList();
+        }
     }
 }

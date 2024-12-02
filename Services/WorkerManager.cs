@@ -45,5 +45,10 @@ namespace Services
         {
             return _manager.Worker.GetWorkersByProfessionId(professionId, trackChanges); 
         }
+
+        public IEnumerable<AvaliableTime> GetAvaliableTimesForWorker(int workerId, bool trackChanges)
+        {
+            return _manager.Worker.GetAvaliableTimesForWorker(workerId, trackChanges);
+        }
     }
 }
