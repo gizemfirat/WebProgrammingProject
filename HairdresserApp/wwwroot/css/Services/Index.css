@@ -1,0 +1,10 @@
+.section-services {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+}
+
+.section-item {
+    margin-right: 6rem;
+}

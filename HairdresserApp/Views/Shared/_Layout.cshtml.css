@@ -1,0 +1,57 @@
+﻿.header {
+  height: 10rem;
+  background-color: var(--color-tertiary-light);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.header-logo {
+  height: 7rem;
+  margin-right: 2rem;
+}
+
+.header-login-logo {
+  height: 3rem;
+  margin-right: 1rem;
+}
+
+.header-item {
+  display: flex;
+  margin: 3rem;
+  align-items: center;
+}
+
+.header-login-item {
+  margin-left: auto;
+  margin-right: 3rem;
+  display: flex;
+  align-items: center;
+}
+
+.footer {
+  grid-row: 2 / span 1;
+  display: flex;
+  align-content: center;
+}
+
+.footer-item {
+  margin-left: 1rem;
+}
+
+.footer-copyright {
+  font-size: 1.5rem;
+  color: var(--color-fourth-dark);
+  font-weight: 500;
+}
+
+.content {
+  margin-top: 10rem;
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content 5rem;
+}

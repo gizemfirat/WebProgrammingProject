@@ -1,0 +1,60 @@
+.heading-primary {
+  font-weight: 500;
+  font-size: 3.5rem;
+  color: var(--color-fourth-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  transition: all .4s;
+  cursor: default;
+
+  &:hover {
+    color: var(--color-fourth-darkest);
+  }
+}
+
+.heading-secondary {
+  font-size: 7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  cursor: default;
+  transition: all .3s;
+
+  &:hover {
+    color: var(--color-fourth-dark);
+    transform: scale(1.001);
+  }
+}
+
+.heading-tertiary {
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: 4.7rem;
+  text-transform: uppercase;
+}
+
+.heading-fourth {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5rem;
+}
+
+.heading-fifth {
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  font-weight: 500;
+  color: var(--color-fourth-dark);
+
+  &:hover {
+    transform: scale(1.005);
+    text-shadow: 3px 4px 7px rgba(0,0,0,0.20);
+  }
+}
+
+.paragraph {
+  font-size: 1.4rem;
+  color: var(--color-black);
+
+}

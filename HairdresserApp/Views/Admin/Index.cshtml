@@ -1,0 +1,61 @@
+@using Entities.Models
+@using System.Text.Json
+@model List<Admin>
+
+
+<h2> Admin List </h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var admin in Model)
+    {
+      <tr>
+        <td> @admin.Username </td>
+        <td>
+            <button class="btn" onclick="showDeleteConfirmation(@admin.Id, '@Html.Encode(admin.Username)')">Delete</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<div id="deleteModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="heading-fifth">Confirm Delete</h5>
+      <span class="btn btn-outlined" onclick="hideDeleteConfirmation()">x</span>
+    </div>
+    <div class="modal-body">
+      <p id="deleteMessage"></p>
+    </div>
+    <div class="modal-footer">
+      <form id="deleteForm" method="post" asp-action="Delete">
+        <input type="hidden" name="id" id="deleteAdminId" />
+        <button type="submit" class="btn btn-primary">Yes</button>
+        <button type="button" class="btn btn-outlined" onclick="hideDeleteConfirmation()">No</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+  <script>
+    function showDeleteConfirmation(id, username) {
+
+      console.log(`ID: ${id}, Username: ${username}`);
+      document.getElementById("deleteAdminId").value = id;
+      document.getElementById("deleteMessage").innerText = `Are you sure you want to delete admin '${username}'?`;
+      document.getElementById("deleteModal").style.display = "block";
+    }
+
+    function hideDeleteConfirmation() {
+      document.getElementById("deleteModal").style.display = "none";
+    }
+  </script>
+}

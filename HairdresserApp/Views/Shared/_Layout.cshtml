@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HairdresserApp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="~/css/Home/Index.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Login/Index.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Register/Index.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Services/Index.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Appointment/Index.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Components/button.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Components/modal.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Components/card.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/typography.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HairdresserApp.styles.css" asp-append-version="true" />
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-item">
+            <img src="/img/logo.png" alt="logo" class="header-logo" />
+            <div class="heading-primary">Myst Hairdresser</div>
+        </div>
+        <div class="header-item">
+            <a asp-controller="Home" asp-action="Index" class="header-link">Home</a>
+        </div>
+        <div class="header-item">
+            <a asp-controller="Services" asp-action="Index" class="header-link">Services</a>
+        </div>
+        <div class="header-item">
+            <a asp-action="Index" class="header-link">Contact us</a>
+        </div>
+
+        <div class="header-login-item">
+            <img src="/img/circle-user.png" alt="menu-item-3" class="header-login-logo" />
+            <a class="header-link" asp-controller="Login" asp-action="Index"> Login </a>
+        </div>
+    </div>
+    <div class="content">
+        @RenderBody()
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

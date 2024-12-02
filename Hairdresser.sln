@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairdresserApp", "HairdresserApp\HairdresserApp.csproj", "{193B297A-8D35-4878-9C43-2E6830C92B4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{DBAB21C7-BB27-4D29-A19B-4996F32B4844}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{3266D118-CDDA-486D-8786-44B73363ED20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{EAFA4827-1F76-420A-B0A3-4EC8C0EB30FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{193B297A-8D35-4878-9C43-2E6830C92B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{193B297A-8D35-4878-9C43-2E6830C92B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{193B297A-8D35-4878-9C43-2E6830C92B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{193B297A-8D35-4878-9C43-2E6830C92B4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBAB21C7-BB27-4D29-A19B-4996F32B4844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBAB21C7-BB27-4D29-A19B-4996F32B4844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBAB21C7-BB27-4D29-A19B-4996F32B4844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBAB21C7-BB27-4D29-A19B-4996F32B4844}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3266D118-CDDA-486D-8786-44B73363ED20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3266D118-CDDA-486D-8786-44B73363ED20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3266D118-CDDA-486D-8786-44B73363ED20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3266D118-CDDA-486D-8786-44B73363ED20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAFA4827-1F76-420A-B0A3-4EC8C0EB30FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAFA4827-1F76-420A-B0A3-4EC8C0EB30FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAFA4827-1F76-420A-B0A3-4EC8C0EB30FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAFA4827-1F76-420A-B0A3-4EC8C0EB30FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

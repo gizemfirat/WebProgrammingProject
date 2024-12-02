@@ -1,0 +1,19 @@
+@model HairdresserApp.Models.CardModel
+
+<div class="card">
+  <div class="card-header">
+    <img src="@Model.ImageUrl" class="card-img" alt="card-img" />
+  </div>
+  <div class="card-title">
+    <h3 class="heading-fourth">@Model.Title</h3>
+  </div>
+  <div class="card-description">
+    <p class="paragraph"> @Model.Description</p>
+  </div>
+  <div class="card-body">
+    <div class="card-button">
+      <a asp-action="@Model.AspAction" asp-controller="@Model.AspController" asp-route-professionId="@Model.ProfessionId"
+        class="btn btn-outlined">@Model.ButtonText</a>
+    </div>
+  </div>
+</div>

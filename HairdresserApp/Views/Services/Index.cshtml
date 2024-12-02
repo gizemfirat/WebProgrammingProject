@@ -1,0 +1,64 @@
+@{
+    var services = new List<HairdresserApp.Models.CardModel>
+    {
+        new HairdresserApp.Models.CardModel
+        {
+            ImageUrl = "/img/barber-shop.png",
+            Title = "Hair Styling",
+            Description = "Feel safe under the skillful hands of our expert hairdressers.",
+            ButtonText = "Make an appointment",
+            AspController = "Appointment",
+            AspAction = "Index",
+            ProfessionId= 1
+        },
+        new HairdresserApp.Models.CardModel
+        {
+            ImageUrl = "/img/makeup-brush.png",
+            Title = "Makeup",
+            Description = "Show yourself the value you need on your special days.",
+            ButtonText = "Make an appointment",
+            AspController = "Appointment",
+            AspAction = "Index",
+            ProfessionId= 2
+        },
+        new HairdresserApp.Models.CardModel
+        {
+            ImageUrl = "/img/hand-sparkles.png",
+            Title = "Nail Art",
+            Description = "Use your nails as a canvas and add fun to every moment of your life.",
+            ButtonText = "Make an appointment",
+            AspController = "Appointment",
+            AspAction = "Index",
+            ProfessionId= 3
+        },
+        new HairdresserApp.Models.CardModel
+        {
+            ImageUrl = "/img/galaxy-star.png",
+            Title = "Manicure",
+            Description = "Have a well-groomed and healthy body.",
+            ButtonText = "Make an appointment",
+            AspController = "Appointment",
+            AspAction = "Index",
+            ProfessionId= 4
+        },
+        new HairdresserApp.Models.CardModel
+        {
+            ImageUrl = "/img/moon-stars.png",
+            Title = "Pedicure",
+            Description = "Have a well-groomed and healthy body.",
+            ButtonText = "Make an appointment",
+            AspController = "Appointment",
+            AspAction = "Index",
+            ProfessionId= 5
+        }
+    };
+}
+
+<div class="section-services">
+  @foreach (var service in services)
+{
+    <div class="section-item">
+        @await Component.InvokeAsync("Card", service)
+    </div>
+}
+</div>
