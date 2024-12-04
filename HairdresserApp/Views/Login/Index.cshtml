@@ -1,20 +1,25 @@
+@model Entities.Models.Customer;
+
 <div class="section-login">
   <div class="section-cover">
     <img src="/img/cover-3.jpeg" alt="cover-3" class="section-cover-img" />
   </div>
   <div class="login-content">
+    <div class="login-message">
+      <h4 class="heading-seventh">@TempData["msj"]</h4>
+    </div>
     <form asp-action="Login" method="post" class="login-form">
       <img src="/img/picpeople-filled.png" alt="login-logo" class="login-logo" />
       <div class="login-form-group">
-        <label class="login-form-label"> Username </label>
-        <input class="login-form-input" type="text" />
+        <label asp-for="Username" class="login-form-label"></label>
+        <input asp-for="Username" class="login-form-input" type="text" />
       </div>
       <div class="login-form-group">
-        <label class="login-form-label"> Password </label>
-        <input class="login-form-input" type="password" />
+        <label asp-for="Password" class="login-form-label"> Password </label>
+        <input asp-for="Password" class="login-form-input" type="password" />
       </div>
       <div class="login-form-group">
-        <button type="submit" class="btn btn-outlined">Sign In</button>
+        <button asp-controller="Login" asp-action="Login" type="submit" class="btn btn-outlined">Sign In</button>
       </div>
       <div class="login-form-group">
         <label class="login-form-label">Don't have an account? Create one!</label>

@@ -41,7 +41,15 @@
 
         <div class="header-login-item">
             <img src="/img/circle-user.png" alt="menu-item-3" class="header-login-logo" />
-            <a class="header-link" asp-controller="Login" asp-action="Index"> Login </a>
+            @if (Context.Session.GetString("customerId") is not null)
+            {
+                <a class="header-link" asp-controller="Login" asp-action="Logout">Logout</a>
+            }
+            else
+            {
+                <a class="header-link" asp-controller="Login" asp-action="Index"> Login </a>
+            }
+
         </div>
     </div>
     <div class="content">

@@ -1,6 +1,7 @@
 using Services.Contracts;
 using Entities.Models;
 using Repositories.Contracts;
+using Entities.ViewModels;
 
 namespace Services
 {
@@ -40,5 +41,16 @@ namespace Services
         {
             _manager.Appointment.UpdateAppointment(appointment);
         }
-  }
+
+        public IEnumerable<AppointmentViewModel> GetAppointmentsByCustomerId(int customerId)
+        {
+            var appointments = _manager.Appointment.GetAppointmentByCustomerId(customerId);
+
+            return appointments.Select(a => new AppointmentViewModel
+            {
+              AppointmentId = a.Id,
+              //TODO BURADAN DEVAM ET
+            })
+        }
+    }
 }

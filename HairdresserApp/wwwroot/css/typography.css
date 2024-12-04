@@ -62,6 +62,12 @@
   }
 }
 
+.heading-seventh {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin-top: 1rem;
+}
+
 .paragraph {
   font-size: 1.4rem;
   color: var(--color-black);

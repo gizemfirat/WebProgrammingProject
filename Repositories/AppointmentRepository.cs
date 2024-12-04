@@ -1,4 +1,5 @@
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repositories.Contracts;
 
 namespace Repositories
@@ -33,5 +34,13 @@ namespace Repositories
       Update(appointment);
       _context.SaveChanges();
     }
-  }
+
+        public IEnumerable<Appointment> GetAppointmentByCustomerId(int customerId)
+        {
+            return _context.Set<Appointment>()   
+            .Where(a => a.Customer == customerId)
+            .ToList();
+        }
+
+    }
 }

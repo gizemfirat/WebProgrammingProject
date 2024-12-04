@@ -9,5 +9,6 @@ namespace Repositories.Contracts
     void AddAppointment(Appointment appointment);
     void DeleteAppointment(Appointment appointment);
     void UpdateAppointment(Appointment appointment);
+    IEnumerable<Appointment> GetAppointmentByCustomerId(int customerId);
   }
 }

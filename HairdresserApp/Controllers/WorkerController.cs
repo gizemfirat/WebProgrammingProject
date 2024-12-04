@@ -11,10 +11,10 @@ namespace HairdresserApp.Controllers
       _manager = manager;
     }
 
-    public IActionResult Index(int workerId) {
-      var avaliableTimes = _manager.WorkerService.GetAvaliableTimesForWorker(workerId, false);
+    public IActionResult Index(int professionId) {
+      var workers = _manager.WorkerService.GetWorkesrByProfessionId(professionId, false);
 
-      return View(avaliableTimes);
+      return View(workers);
     }
   }
 }
