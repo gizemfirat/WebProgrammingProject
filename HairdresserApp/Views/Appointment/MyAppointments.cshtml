@@ -1,0 +1,104 @@
+@model IEnumerable<Entities.ViewModels.AppointmentViewModel>
+
+<div class="section-appointments">
+  <h2 class="heading-fifth"> My appointments</h2>
+  <table class="appointments-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Worker</th>
+        <th>Profession</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var appointment in Model)
+      {
+        <tr>
+          <td>@appointment.Date.ToString("yyyy-MM-dd HH:mm")</td>
+          <td>@appointment.WorkerName</td>
+          <td>@appointment.ProfessionName</td>
+          <td>@appointment.Price</td>
+          <td>
+            <button class="btn btn-primary" data-appointment-id="@appointment.AppointmentId"
+              data-appointment-date="@appointment.Date.ToString("yyyy-MM-dd HH:mm")"
+              data-worker-name="@appointment.WorkerName" onclick="openModal(this)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close-button"> &times; </span>
+    <h5 class="heading-fifth">Confirm Delete</h5>
+    <p class="paragraph"> Are you sure you want to delete this appointment?</p>
+    <div>
+      <strong>Appointment Details:</strong>
+      <p class="paragraph">Date: <span id="modalAppointmentDate"></span></p>
+      <p class="paragraph">Worker: <span id="modalAppointmentWorker"></span></p>
+    </div>
+    <div class="modal-actions">
+      <button id="cancel-button" class="btn btn-outlined">Cancel</button>
+      <button id="delete-button" class="btn btn-outlined">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById("modal");
+    var deleteAppointmentId = 0;
+
+    // openModal fonksiyonunun tanımı
+    function openModal(button) {
+      var appointmentId = button.getAttribute('data-appointment-id');
+      var date = button.getAttribute('data-appointment-date');
+      var workerName = button.getAttribute('data-worker-name');
+
+      deleteAppointmentId = appointmentId;
+      document.getElementById("modalAppointmentDate").textContent = date;
+      document.getElementById("modalAppointmentWorker").textContent = workerName;
+      modal.style.display = "flex";
+    }
+
+    // closeModal fonksiyonu
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    // Silme butonuna tıklama işlemi
+    document.getElementById("delete-button").addEventListener("click", function () {
+      fetch('Appointment/Delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: deleteAppointmentId })
+      })
+      .then(response => {
+        if (response.ok) {
+          location.reload();
+        } else {
+          alert("Failed to delete the appointment");
+        }
+      });
+
+      closeModal();
+    });
+
+    // Cancel butonuna tıklama
+    document.getElementById("cancel-button").addEventListener("click", closeModal);
+    document.querySelector(".close-button").addEventListener("click", closeModal);
+
+    // Modal dışına tıklanırsa modalı kapat
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        closeModal();
+      }
+    };
+  });
+</script>

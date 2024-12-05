@@ -35,6 +35,12 @@
         <div class="header-item">
             <a asp-controller="Services" asp-action="Index" class="header-link">Services</a>
         </div>
+        @if (Context.Session.GetString("customerId") is not null)
+        {
+            <div class="header-item">
+                <a asp-controller="Appointment" asp-action="MyAppointments" class="header-link">My Appointments</a>
+            </div>
+        }
         <div class="header-item">
             <a asp-action="Index" class="header-link">Contact us</a>
         </div>

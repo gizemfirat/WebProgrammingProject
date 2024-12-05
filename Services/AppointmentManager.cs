@@ -32,9 +32,18 @@ namespace Services
             _manager.Appointment.AddAppointment(appointment);
         }
 
-        public void DeleteAppointment(Appointment appointment)
+        public void DeleteAppointment(int appointmentId)
         {
-            _manager.Appointment.DeleteAppointment(appointment);
+            var appointment = _manager.Appointment.GetAppointment(appointmentId, false);
+            if(appointment != null) {
+              var avaliableTime = _manager.AvaliableTime.GetAvaliableTime(appointment.Date, false);
+              if(avaliableTime != null) {
+                avaliableTime.IsAvaliable = 1;
+                _manager.AvaliableTime.UpdateAvaliableTime(avaliableTime);
+              }
+
+              _manager.Appointment.DeleteAppointment(appointment);
+            }
         }
 
         public void UpdateAppointment(Appointment appointment)
@@ -44,13 +53,7 @@ namespace Services
 
         public IEnumerable<AppointmentViewModel> GetAppointmentsByCustomerId(int customerId)
         {
-            var appointments = _manager.Appointment.GetAppointmentByCustomerId(customerId);
-
-            return appointments.Select(a => new AppointmentViewModel
-            {
-              AppointmentId = a.Id,
-              //TODO BURADAN DEVAM ET
-            })
+          return _manager.Appointment.GetAppointmentByCustomerId(customerId);
         }
     }
 }

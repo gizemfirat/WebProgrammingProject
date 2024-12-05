@@ -1,4 +1,5 @@
 using Entities.Models;
+using Entities.ViewModels;
 
 namespace Repositories.Contracts
 {
@@ -9,6 +10,6 @@ namespace Repositories.Contracts
     void AddAppointment(Appointment appointment);
     void DeleteAppointment(Appointment appointment);
     void UpdateAppointment(Appointment appointment);
-    IEnumerable<Appointment> GetAppointmentByCustomerId(int customerId);
+    IEnumerable<AppointmentViewModel> GetAppointmentByCustomerId(int customerId);
   }
 }

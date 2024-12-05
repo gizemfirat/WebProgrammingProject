@@ -1,4 +1,5 @@
 using Entities.Models;
+using Entities.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Contracts;
 
@@ -35,11 +36,23 @@ namespace Repositories
       _context.SaveChanges();
     }
 
-        public IEnumerable<Appointment> GetAppointmentByCustomerId(int customerId)
+        public IEnumerable<AppointmentViewModel> GetAppointmentByCustomerId(int customerId)
         {
-            return _context.Set<Appointment>()   
-            .Where(a => a.Customer == customerId)
-            .ToList();
+          var appointments = from a in _context.Appointments
+                            join w in _context.Workers on a.Worker equals w.Id
+                            join p in _context.Professions on w.Profession equals p.Id
+                            join at in _context.AvaliableTimes on a.Date equals at.Id
+                            where a.Customer == customerId
+                            select new AppointmentViewModel
+                            {
+                              AppointmentId = a.Id,
+                              Date = at.Time,
+                              WorkerName = w.Name + " " + w.Surname,
+                              ProfessionName = p.Name,
+                              Price = p.Price
+                            };
+                            
+                            return appointments.ToList();
         }
 
     }

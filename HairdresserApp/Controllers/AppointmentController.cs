@@ -20,17 +20,19 @@ namespace HairdresserApp.Controllers
     }
 
     public IActionResult MyAppointments() {
-      string sessionCustomerId = HttpContext.Session.GetString("customerId");
-
-      if(sessionCustomerId is null) {
-        return RedirectToAction("Index", "Home");
+      if(string.IsNullOrEmpty(HttpContext.Session.GetString("customerId"))) {
+        return RedirectToAction("Login", "Login");
       }
 
-      int customerId = Convert.ToInt32(sessionCustomerId);
-
+      int customerId = int.Parse(HttpContext.Session.GetString("customerId"));
       var appointments = _manager.AppointmentService.GetAppointmentsByCustomerId(customerId);
 
       return View(appointments);
+    }
+    [HttpPost]
+    public IActionResult Delete(int id) {
+      _manager.AppointmentService.DeleteAppointment(id);
+      return Ok();
     }
   }
 }
