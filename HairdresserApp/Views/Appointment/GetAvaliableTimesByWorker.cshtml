@@ -1,0 +1,71 @@
+@using Entities.Models;
+@model IEnumerable<AvaliableTime>
+
+
+<div class="section-appointments">
+  <h2 class="heading-fifth"> Avaliable Times </h2>
+  <div class="appointment-display">
+    @foreach (var time in Model)
+    {
+      var colorClass = time.IsAvaliable == 1 ? "avaliable" : "notAvaliable";
+      var img = time.IsAvaliable == 1 ? "/img/calendar-pen.png" : "/img/calendar-xmark.png";
+      <div class="appointment-box ">
+        <div class="appointment-header">
+          <img src="@img" alt="time-logo" class="appointment-logo" />
+          <h5 class="heading-sixth"> @time.Time.ToString("yyyy-MM-dd HH:mm")</h5>
+          <h5 class="heading-sixth dark">@(time.IsAvaliable == 1 ? "Avaliable" : "Not Avaliable")</h5>
+        </div>
+        <div class="appointment-footer">
+          <button class="btn btn-primary" onclick="openModal(@time.Worker, @time.Id)">Book Now</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<div id="bookingModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close-button" onclick="closeModal()">x</span>
+      <h2 class="heading-fifth">Confirm Booking</h2>
+    </div>
+    <div class="modal-body u-margin-bottom-2">
+      <p id="modal-details"></p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outlined" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" id="confirmButton">Book</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openModal(workerId, dateId,) {
+    document.getElementById("modal-details").textContent = "Are you sure you want to make appointment appointment?";
+    document.getElementById("confirmButton").onclick = function () {
+      bookAppointment(workerId, dateId);
+    };
+    document.getElementById("bookingModal").style.display = "block";
+  }
+
+  function bookAppointment(workerId, dateId) {
+    fetch(`/api/Appointment/BookAppointment`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ workerId, dateId })
+    })
+      .then(response => {
+        if (response.ok) {
+          alert("Appointment successfully booked!");
+          location.reload();
+        } else {
+          alert("Failed to book the appointment.");
+        }
+      });
+  }
+  
+  function closeModal() {
+    document.getElementById("bookingModal").style.display = "none";
+  }
+
+</script>

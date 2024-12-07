@@ -1,4 +1,5 @@
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repositories.Contracts;
 
 namespace Repositories
@@ -33,5 +34,16 @@ namespace Repositories
       Update(avaliableTime);
       _context.SaveChanges();
     }
-  }
+
+        public async Task<AvaliableTime> GetByIdAsync(int id)
+        {
+            return await _context.Set<AvaliableTime>().FindAsync(id);
+        }
+
+        public async Task UpdateAsync(AvaliableTime avaliableTime)
+        {
+            _context.Set<AvaliableTime>().Update(avaliableTime);
+            await _context.SaveChangesAsync();
+        }
+    }
 }

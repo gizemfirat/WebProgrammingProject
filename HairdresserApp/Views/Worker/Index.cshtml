@@ -14,7 +14,7 @@
         </div>
 
         <div class="appointment-footer">
-          <a href="@Url.Action("Index", "Appointment", new { workerId = worker.Id })" class="btn btn-outlined">Select</a>
+          <a href="@Url.Action("GetAvaliableTimesByWorker", "Appointment", new { workerId = worker.Id })" class="btn btn-outlined">Select</a>
         </div>
       </div>
     }

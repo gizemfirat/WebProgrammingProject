@@ -55,5 +55,21 @@ namespace Repositories
                             return appointments.ToList();
         }
 
+        public async Task<Appointment> GetByIdAsync(int id)
+        {
+          return await _context.Set<Appointment>().FindAsync(id);   
+        }
+
+        public async Task DeleteAsync(Appointment appointment)
+        {
+            _context.Set<Appointment>().Remove(appointment);
+            await _context.SaveChangesAsync();
+        }
+
+        public void Create(Appointment appointment)
+        {
+            _context.Appointments.Add(appointment);
+            _context.SaveChanges();
+        }
     }
 }

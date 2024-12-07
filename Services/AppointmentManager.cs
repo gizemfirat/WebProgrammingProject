@@ -55,5 +55,42 @@ namespace Services
         {
           return _manager.Appointment.GetAppointmentByCustomerId(customerId);
         }
+
+        public async Task<bool> DeleteAppointmentAysnc(int appointmentId)
+        {
+            var appointment = await _manager.Appointment.GetByIdAsync(appointmentId);
+            if(appointment == null) {
+              return false;
+            }
+
+            var avaliableTime = await _manager.AvaliableTime.GetByIdAsync(appointment.Date);
+            if(avaliableTime != null) {
+              avaliableTime.IsAvaliable = 1;
+              await _manager.AvaliableTime.UpdateAsync(avaliableTime);
+            }
+
+            await _manager.Appointment.DeleteAsync(appointment);
+            return true;
+        }
+
+        public bool BookAppointment(int customerId, int workerId, int dateId)
+        {
+          var avaliableTime = _manager.AvaliableTime.GetByIdAsync(dateId).Result;
+          if(avaliableTime == null || avaliableTime.IsAvaliable == 0) {
+            return false;
+          }
+
+          var appointment = new Appointment {
+            Customer = customerId,
+            Worker = workerId,
+            Date = dateId
+          };
+
+          _manager.Appointment.Create(appointment);
+          avaliableTime.IsAvaliable = 0;
+          _manager.AvaliableTime.Update(avaliableTime);
+
+          return true;
+        }
     }
 }

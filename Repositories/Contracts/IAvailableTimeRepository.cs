@@ -9,5 +9,7 @@ namespace Repositories.Contracts
     void AddAvaliableTime(AvaliableTime avaliableTime);
     void DeleteAvaliableTime(AvaliableTime avaliableTime);
     void UpdateAvaliableTime(AvaliableTime avaliableTime);
+    Task<AvaliableTime> GetByIdAsync(int id);
+    Task UpdateAsync(AvaliableTime avaliableTime);
   }
 }

@@ -11,5 +11,7 @@ namespace Services.Contracts
     void DeleteAppointment(int AppointmentId);
     void UpdateAppointment(Appointment appointment);
     IEnumerable<AppointmentViewModel> GetAppointmentsByCustomerId(int customerId);
+    Task<bool> DeleteAppointmentAysnc(int appointmentId);
+    bool BookAppointment(int customerId, int workerId, int dateId);
   }
 }

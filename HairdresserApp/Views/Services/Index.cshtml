@@ -1,64 +1,23 @@
-@{
-    var services = new List<HairdresserApp.Models.CardModel>
-    {
-        new HairdresserApp.Models.CardModel
-        {
-            ImageUrl = "/img/barber-shop.png",
-            Title = "Hair Styling",
-            Description = "Feel safe under the skillful hands of our expert hairdressers.",
-            ButtonText = "Make an appointment",
-            AspController = "Worker",
-            AspAction = "Index",
-            ProfessionId= 1
-        },
-        new HairdresserApp.Models.CardModel
-        {
-            ImageUrl = "/img/makeup-brush.png",
-            Title = "Makeup",
-            Description = "Show yourself the value you need on your special days.",
-            ButtonText = "Make an appointment",
-            AspController = "Worker",
-            AspAction = "Index",
-            ProfessionId= 2
-        },
-        new HairdresserApp.Models.CardModel
-        {
-            ImageUrl = "/img/hand-sparkles.png",
-            Title = "Nail Art",
-            Description = "Use your nails as a canvas and add fun to every moment of your life.",
-            ButtonText = "Make an appointment",
-            AspController = "Worker",
-            AspAction = "Index",
-            ProfessionId= 3
-        },
-        new HairdresserApp.Models.CardModel
-        {
-            ImageUrl = "/img/galaxy-star.png",
-            Title = "Manicure",
-            Description = "Have a well-groomed and healthy body.",
-            ButtonText = "Make an appointment",
-            AspController = "Worker",
-            AspAction = "Index",
-            ProfessionId= 4
-        },
-        new HairdresserApp.Models.CardModel
-        {
-            ImageUrl = "/img/moon-stars.png",
-            Title = "Pedicure",
-            Description = "Have a well-groomed and healthy body.",
-            ButtonText = "Make an appointment",
-            AspController = "Worker",
-            AspAction = "Index",
-            ProfessionId= 5
-        }
-    };
-}
+@model IEnumerable<Entities.Models.Profession>
 
 <div class="section-services">
-  @foreach (var service in services)
-{
-    <div class="section-item">
-        @await Component.InvokeAsync("Card", service)
+    <h2 class="heading-services">Our Services</h2>
+    <div class="profession-cards">
+        @foreach (var profession in Model)
+        {
+            <div class="card-item">
+                @await Component.InvokeAsync("Card", new HairdresserApp.Models.CardModel
+       {
+           Title = profession.Name,
+           Description = "Explore our skilled professionals in " + profession.Name + ".",
+           ImageUrl = "/img/profession_" + profession.Id + ".png",
+           AspController = "Worker",
+           AspAction = "Index",
+           ProfessionId = profession.Id,
+           ButtonText = "View Workers"
+       })
+            </div>
+
+        }
     </div>
-}
 </div>

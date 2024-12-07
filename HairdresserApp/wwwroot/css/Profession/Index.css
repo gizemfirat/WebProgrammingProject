@@ -1,0 +1,8 @@
+.profession-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5rem;
+  justify-content: center;
+  margin-left: -2rem;
+  margin-top: 5rem;
+}

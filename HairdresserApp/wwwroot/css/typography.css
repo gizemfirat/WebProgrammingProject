@@ -73,3 +73,8 @@
   color: var(--color-black);
 
 }
+
+.modal-paragraph {
+  font-size: 1.6rem;
+  color: var(--color-black);
+}

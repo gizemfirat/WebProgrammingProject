@@ -1,10 +1,25 @@
 .section-services {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 10rem;
+  margin-top: 5rem;
 }
 
 .section-item {
     margin-right: 6rem;
+}
+
+.heading-services {
+  font-size: 5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-fourth-dark);
+  letter-spacing: 1rem;
+  transition: all .2s;
+
+  &:hover {
+    color: var(--color-fourth-darkest);
+    transform: scale(1.01);
+  }
 }

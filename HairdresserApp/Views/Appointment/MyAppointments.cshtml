@@ -19,11 +19,9 @@
           <td>@appointment.Date.ToString("yyyy-MM-dd HH:mm")</td>
           <td>@appointment.WorkerName</td>
           <td>@appointment.ProfessionName</td>
-          <td>@appointment.Price</td>
+          <td>@appointment.Price tl</td>
           <td>
-            <button class="btn btn-primary" data-appointment-id="@appointment.AppointmentId"
-              data-appointment-date="@appointment.Date.ToString("yyyy-MM-dd HH:mm")"
-              data-worker-name="@appointment.WorkerName" onclick="openModal(this)">
+            <button class="btn btn-primary" onclick="openModal(@appointment.AppointmentId, '@appointment.Date', '@appointment.WorkerName')">
               Delete
             </button>
           </td>
@@ -33,72 +31,52 @@
   </table>
 </div>
 
-<div id="modal" class="modal">
+<div id="deleteModal" class="modal">
   <div class="modal-content">
-    <span class="close-button"> &times; </span>
-    <h5 class="heading-fifth">Confirm Delete</h5>
-    <p class="paragraph"> Are you sure you want to delete this appointment?</p>
-    <div>
-      <strong>Appointment Details:</strong>
-      <p class="paragraph">Date: <span id="modalAppointmentDate"></span></p>
-      <p class="paragraph">Worker: <span id="modalAppointmentWorker"></span></p>
+    <div class="modal-header">
+      <span class="close-button" onclick="closeModal()">x</span>
+      <h2 class="heading-fifth"> Confirm Delete</h2>
     </div>
-    <div class="modal-actions">
-      <button id="cancel-button" class="btn btn-outlined">Cancel</button>
-      <button id="delete-button" class="btn btn-outlined">Delete</button>
+    <div class="modal-body">
+      <p class="modal-paragraph u-margin-bottom-2"> Are you sure you want to delete this appointment?</p>
+      <p class="modal-paragraph" id="modal-appointment-details"></p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outlined" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" id="confirmDeleteButton">Delete</button>
     </div>
   </div>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var modal = document.getElementById("modal");
-    var deleteAppointmentId = 0;
+  let deleteAppointmentId;
 
-    // openModal fonksiyonunun tanımı
-    function openModal(button) {
-      var appointmentId = button.getAttribute('data-appointment-id');
-      var date = button.getAttribute('data-appointment-date');
-      var workerName = button.getAttribute('data-worker-name');
+  function openModal(appointmentId, date, workerName) {
+    deleteAppointmentId = appointmentId;
+    document.getElementById("modal-appointment-details").textContent = "Date: " + date +  ", " + "Worker: " + workerName;
+    document.getElementById("deleteModal").style.display = "block";
+  }
 
-      deleteAppointmentId = appointmentId;
-      document.getElementById("modalAppointmentDate").textContent = date;
-      document.getElementById("modalAppointmentWorker").textContent = workerName;
-      modal.style.display = "flex";
-    }
+  function closeModal() {
+    document.getElementById("deleteModal").style.display = "none";
+  }
 
-    // closeModal fonksiyonu
-    function closeModal() {
-      modal.style.display = "none";
-    }
+  document.getElementById("confirmDeleteButton").addEventListener("click", async () => {
+    if(!deleteAppointmentId) return;
 
-    // Silme butonuna tıklama işlemi
-    document.getElementById("delete-button").addEventListener("click", function () {
-      fetch('Appointment/Delete', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: deleteAppointmentId })
-      })
-      .then(response => {
-        if (response.ok) {
-          location.reload();
-        } else {
-          alert("Failed to delete the appointment");
-        }
-      });
-
-      closeModal();
-    });
-
-    // Cancel butonuna tıklama
-    document.getElementById("cancel-button").addEventListener("click", closeModal);
-    document.querySelector(".close-button").addEventListener("click", closeModal);
-
-    // Modal dışına tıklanırsa modalı kapat
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        closeModal();
+    try {
+      const response = await fetch(`/api/appointment/${deleteAppointmentId}`, {method: "DELETE"});
+      if(response.ok) {
+        alert("Appointment deleted successfully.");
+        location.reload();
+      } else {
+        alert("Failed to delete thead appointment.");
       }
-    };
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occured!");
+    }
+
+    closeModal();
   });
 </script>
