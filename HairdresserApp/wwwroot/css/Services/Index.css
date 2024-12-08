@@ -1,16 +1,25 @@
 .section-services {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content 1fr;
 }
 
 .section-item {
-    margin-right: 6rem;
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
+  justify-self: center;
+  margin-top: 5rem;
+}
+
+
+.card-item {
 }
 
 .heading-services {
+  text-align: left;
+}
+
+.heading-service {
   font-size: 5rem;
   font-weight: 600;
   text-transform: uppercase;

@@ -1,8 +1,9 @@
 @model IEnumerable<Entities.Models.Profession>
 
 <div class="section-services">
-    <h2 class="heading-services">Our Services</h2>
-    <div class="profession-cards">
+    <h2 class="heading-service">Our Services</h2>
+
+    <div class="section-item">
         @foreach (var profession in Model)
         {
             <div class="card-item">
@@ -10,7 +11,7 @@
        {
            Title = profession.Name,
            Description = "Explore our skilled professionals in " + profession.Name + ".",
-           ImageUrl = "/img/profession_" + profession.Id + ".png",
+           ImageUrl = "/img/p-" + profession.Id + ".png",
            AspController = "Worker",
            AspAction = "Index",
            ProfessionId = profession.Id,
@@ -20,5 +21,7 @@
             </div>
 
         }
+
     </div>
+
 </div>

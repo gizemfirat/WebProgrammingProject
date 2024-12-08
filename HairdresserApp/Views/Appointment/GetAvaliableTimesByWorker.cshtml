@@ -40,19 +40,12 @@
 </div>
 
 <script>
-  function openModal(workerId, dateId,) {
-    document.getElementById("modal-details").textContent = "Are you sure you want to make appointment appointment?";
-    document.getElementById("confirmButton").onclick = function () {
-      bookAppointment(workerId, dateId);
-    };
-    document.getElementById("bookingModal").style.display = "block";
-  }
 
   function bookAppointment(workerId, dateId) {
     fetch(`/api/Appointment/BookAppointment`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ workerId, dateId })
+      body: JSON.stringify({workerId: workerId, dateId: dateId })
     })
       .then(response => {
         if (response.ok) {
@@ -62,6 +55,14 @@
           alert("Failed to book the appointment.");
         }
       });
+  }
+
+  function openModal(workerId, dateId,) {
+    document.getElementById("modal-details").textContent = "Are you sure you want to make appointment appointment?";
+    document.getElementById("confirmButton").onclick = function () {
+      bookAppointment(workerId, dateId);
+    };
+    document.getElementById("bookingModal").style.display = "block";
   }
   
   function closeModal() {

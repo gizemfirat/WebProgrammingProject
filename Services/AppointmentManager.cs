@@ -88,7 +88,7 @@ namespace Services
 
           _manager.Appointment.Create(appointment);
           avaliableTime.IsAvaliable = 0;
-          _manager.AvaliableTime.Update(avaliableTime);
+          _manager.AvaliableTime.UpdateAsync(avaliableTime);
 
           return true;
         }

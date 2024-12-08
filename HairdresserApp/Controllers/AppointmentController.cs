@@ -63,14 +63,16 @@ namespace HairdresserApp.Controllers
     }
 
     [HttpPost("BookAppointment")]
-    public IActionResult BookAppointment(int workerId, int dateId) {
+    public IActionResult BookAppointment([FromBody] AppointmentRequest request) {
       if(String.IsNullOrEmpty(HttpContext.Session.GetString("customerId"))) {
         return Unauthorized();
       }
 
+      var worker = _manager.WorkerService.GetWorker(request.WorkerId, false);
+
       int customerId = int.Parse(HttpContext.Session.GetString("customerId"));
 
-      var success = _manager.AppointmentService.BookAppointment(customerId, workerId, dateId);
+      var success = _manager.AppointmentService.BookAppointment(customerId, request.WorkerId, request.DateId);
       
       if(!success) {
         return BadRequest("Appointment could not be created.");
