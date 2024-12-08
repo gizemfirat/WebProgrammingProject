@@ -6,5 +6,6 @@ namespace Entities.Models
     public String Name { get; set; }
     public String Surname { get; set; }
     public int Profession { get; set; }
+    public decimal Salary { get; set; }
   }
 }
