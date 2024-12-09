@@ -11,6 +11,8 @@ namespace Repositories
     public DbSet<Profession> Professions {get; set;}
     public DbSet<AvaliableTime> AvaliableTimes {get; set;}
     public DbSet<Appointment> Appointments {get; set;}
+    public DbSet<Process> Processes {get; set;}
+    public DbSet<WorkerProcess> WorkerProcesses {get; set;}
 
     public RepositoryContext(DbContextOptions<RepositoryContext> options) : base(options) {
       

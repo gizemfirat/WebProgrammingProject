@@ -1,0 +1,16 @@
+@model List<Entities.ViewModels.ProfessionViewModel>
+
+<h1> Professions and Processes </h1>
+
+@foreach(var profession in Model) {
+  <h2> @profession.ProfessionName </h2>
+  <ul>
+    @foreach(var process in profession.Processes) {
+      <li>
+        @process.ProcessName -
+        Time:- @process.Time mins -
+        Price:- @process.Price ₺
+      </li>
+    }
+  </ul>
+}

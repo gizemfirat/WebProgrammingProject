@@ -1,0 +1,33 @@
+@model List<Entities.Models.Process>
+
+<div class="section-processes">
+  <div class="processes-header">
+    <h2 class="heading-fifth"> Processes </h2>
+  </div>
+  <div class="processes-block">
+    @foreach (var process in Model)
+    {
+      <div class="processes-item">
+        <div class="processes-icon">
+          <img src="/img/square-heart.png" alt="process-icon" class="processes-img" />
+        </div>
+        <div class="processes-title">
+          <p class="paragraph big">Process Name: @process.Name</p>
+        </div>
+        <div class="processes-time">
+          <p class="paragraph big">Established Time: @process.Time</p>
+        </div>
+        <div class="processes-price">
+          <p class="paragraph big">Price: @process.Price</p>
+        </div>
+        <div class="processes-button">
+          <form asp-controller="Process" asp-action="ViewWorkers" method="get">
+            <input type="hidden" name="processId" value="@process.Id" />
+            <button type="submit">View Workers</button>
+          </form>
+        </div>
+
+      </div>
+    }
+  </div>
+</div>

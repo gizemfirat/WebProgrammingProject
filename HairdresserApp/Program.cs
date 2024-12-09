@@ -19,6 +19,8 @@ builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
 builder.Services.AddScoped<IProfessionRepository, ProfessionRepository>();
 builder.Services.AddScoped<IAvaliableTimeRepository, AvaliableTimeRepository>();
 builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+builder.Services.AddScoped<IProcessRepository, ProcessRepository>();
+builder.Services.AddScoped<IWorkerProcessRepository, WorkerProcessRepository>();
 
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddScoped<IAdminService, AdminManager>();
@@ -27,6 +29,9 @@ builder.Services.AddScoped<IWorkerService, WorkerManager>();
 builder.Services.AddScoped<IProfessionService, ProfessionManager>();
 builder.Services.AddScoped<IAvaliableTimeService, AvaliableTimeManager>();
 builder.Services.AddScoped<IAppointmentService, AppointmentManager>();
+builder.Services.AddScoped<IProcessService, ProcessManager>();
+builder.Services.AddScoped<IWorkerProcessService, WorkerProcessManager>();
+
 var app = builder.Build();
 
 

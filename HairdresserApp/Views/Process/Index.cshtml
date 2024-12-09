@@ -1,0 +1,9 @@
+@model IEnumerable<Entities.Models.Process>
+
+<div>
+  @foreach(var process in Model) {
+    <div> @process.Name </div>
+    <div> @process.Time </div>
+    <div> @process.Price </div>
+  }
+</div>

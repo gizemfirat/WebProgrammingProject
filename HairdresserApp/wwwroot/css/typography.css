@@ -72,6 +72,10 @@
   font-size: 1.4rem;
   color: var(--color-black);
 
+  &.big {
+    font-size: 1.6rem;
+  }
+
 }
 
 .modal-paragraph {

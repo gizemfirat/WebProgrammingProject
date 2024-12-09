@@ -8,6 +8,8 @@ namespace Repositories.Contracts
     IProfessionRepository Profession { get; }
     IAvaliableTimeRepository AvaliableTime { get; }
     IAppointmentRepository Appointment { get; }
+    IProcessRepository Process { get; }
+    IWorkerProcessRepository WorkerProcess { get; }
 
     void Save();
   }

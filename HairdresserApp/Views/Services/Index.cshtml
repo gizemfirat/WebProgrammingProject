@@ -12,10 +12,10 @@
            Title = profession.Name,
            Description = "Explore our skilled professionals in " + profession.Name + ".",
            ImageUrl = "/img/p-" + profession.Id + ".png",
-           AspController = "Worker",
-           AspAction = "Index",
+           AspController = "Process",
+           AspAction = "GetProcessesByProfession",
            ProfessionId = profession.Id,
-           ButtonText = "View Workers",
+           ButtonText = "View Details",
            Time = "Estimated Time: " + profession.Time + " minutes"
        })
             </div>

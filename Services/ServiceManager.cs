@@ -10,8 +10,10 @@ namespace Services
       private readonly IProfessionService _professionService;
       private readonly IAvaliableTimeService _avaliableTimeService;
       private readonly IAppointmentService _appointmentService;
+      private readonly IProcessService _processService;
+      private readonly IWorkerProcessService _workerProcessService;
 
-        public ServiceManager(IAdminService adminService, ICustomerService customerService, IWorkerService workerService, IProfessionService professionService, IAvaliableTimeService avaliableTimeService, IAppointmentService appointmentService)
+        public ServiceManager(IAdminService adminService, ICustomerService customerService, IWorkerService workerService, IProfessionService professionService, IAvaliableTimeService avaliableTimeService, IAppointmentService appointmentService, IProcessService processService, IWorkerProcessService workerProcessService)
         {
             _adminService = adminService;
             _customerService = customerService;
@@ -19,6 +21,8 @@ namespace Services
             _professionService = professionService;
             _avaliableTimeService = avaliableTimeService;
             _appointmentService = appointmentService;
+            _processService = processService;
+            _workerProcessService = workerProcessService;
         }
 
         public IAdminService AdminService => _adminService;
@@ -27,6 +31,8 @@ namespace Services
         public IProfessionService ProfessionService => _professionService;
         public IAvaliableTimeService AvaliableTimeService => _avaliableTimeService;
         public IAppointmentService AppointmentService => _appointmentService;
+        public IProcessService ProcessService => _processService;
+        public IWorkerProcessService WorkerProcessService => _workerProcessService;
 
     }
 }

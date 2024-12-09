@@ -8,5 +8,7 @@ namespace Services.Contracts
     IProfessionService ProfessionService { get; }
     IAvaliableTimeService AvaliableTimeService { get; }
     IAppointmentService AppointmentService { get; }
+    IProcessService ProcessService { get; }
+    IWorkerProcessService WorkerProcessService { get; }
   }
 }

@@ -1,0 +1,24 @@
+@model List<Entities.Models.Worker>
+
+<h2>Workers</h2>
+
+<div>
+
+  @if (!Model.Any())
+  {
+    <div> No Workers are assigned to this process.</div>
+  }
+  else
+  {
+    @foreach (var worker in Model)
+    {
+      <div> @worker.Name @worker.Surname</div>
+      <div> @worker.Salary</div>
+
+      <form asp-controller="Appointment" asp-action="GetAvaliableTimesByWorker" method="get">
+        <input type="hidden" name="workerId" value="@worker.Id"/>
+        <button type="submit">View Dates</button>
+      </form>
+    }
+  }
+</div>

@@ -56,7 +56,6 @@ namespace HairdresserApp.Controllers
       return NoContent();
     }
 
-    [HttpGet("AvaliableTimes/{workerId}")]
     public IActionResult GetAvaliableTimesByWorker(int workerId) {
       var avaliableTimes = _manager.WorkerService.GetAvaliableTimesForWorker(workerId, false);
       return View(avaliableTimes);
