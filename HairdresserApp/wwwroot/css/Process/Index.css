@@ -10,14 +10,16 @@
   margin-bottom: 3rem;
 }
 
+.processes-block {
+
+}
+
 .processes-item {
   display: grid;
-  grid-template-columns: 20rem 30rem 20rem;
+  grid-template-columns: max-content 40rem max-content;
   grid-template-rows: max-content max-content;
   align-items: center;
-  text-align: center;
-  background-color: aqua;
-  margin-bottom: 3rem;
+
 }
 
 .processes-icon {
@@ -26,6 +28,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1.4rem;
 }
 
 .processes-img {
@@ -33,6 +36,9 @@
   width: auto;
 }
 
+.processes-body {
+  /*padding: 2rem;*/
+}
 .procecess-title {
   grid-column: 2/ span 1;
   grid-column: 1 / span 1;
@@ -50,5 +56,6 @@
 
 .processes-button {
   grid-column: 3 /span 1;
-  grid: 2 / span 1;
+  grid-row: 1 / -1;
+  align-self: center;
 }

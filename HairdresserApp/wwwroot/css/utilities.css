@@ -18,3 +18,13 @@
 .u-margin-left-2 {
   margin-left: 2rem;
 }
+
+.u-border-top {
+  border-top: 1px solid var(--color-grey-dark);
+  width: 40%;
+}
+
+.u-border-bottom {
+  border-bottom: 1px solid var(--color-grey-dark);
+  width: 40%;
+}

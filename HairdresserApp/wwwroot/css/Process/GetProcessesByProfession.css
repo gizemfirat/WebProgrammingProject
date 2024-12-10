@@ -1,0 +1,65 @@
+.section-processes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7rem;
+}
+
+.processes-header {
+  text-align: center;
+}
+
+.process-card {
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  align-items: center;
+  width: 17%;
+  background-color: var(--color-fourth-lightest);
+  border-radius: 10px;
+  border: 1px solid var(--color-grey);
+  overflow: hidden;
+  transition: all .3s;
+
+  &:hover {
+    transform: translateY(-1rem);
+    box-shadow: -2px 13px 19px -6px rgba(0,0,0,0.39);
+    border: 1px solid var(--color-grey-dark);
+  }
+
+}
+
+.process-card-header {
+  padding: 2rem;
+}
+
+.process-card-icon {
+  height: 10rem;
+}
+
+.process-card-content {
+  padding: 1rem;
+
+}
+
+.process-card-title {
+  text-align: center;
+}
+
+.process-card-description {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  grid-template-rows: repeat(2, max-content);
+  justify-content: space-evenly;
+  grid-gap: 2rem;
+  text-align: center;
+}
+
+.process-card-button {
+  width: 100%;
+  margin-top: auto;
+}
+
+.card-data {
+  text-align: right;
+}

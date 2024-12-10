@@ -76,6 +76,28 @@
     font-size: 1.6rem;
   }
 
+  &.bold {
+    font-weight: 700;
+    color: var(--color-fourth-dark);
+  }
+
+  &.title {
+    font-weight: 700;
+    font-size: 2.3rem;
+    color: var(--color-fourth-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: all .2s;
+    cursor: default;
+    letter-spacing: 0.3;
+
+    &:hover {
+      color: var(--color-fourth-darkest);
+      transform: translateY(-0.2rem);
+      text-shadow: 0px 2px 2px rgba(0,0,0,0.23);
+    }
+  }
+
 }
 
 .modal-paragraph {
