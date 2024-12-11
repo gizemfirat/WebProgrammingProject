@@ -24,6 +24,12 @@
     color: var(--color-fourth-dark);
     transform: scale(1.001);
   }
+
+  &.lighter {
+    font-weight: 500;
+    font-size: 3rem;
+    color: var(--color-fourth-dark);
+  }
 }
 
 .heading-tertiary {
@@ -38,6 +44,10 @@
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.5rem;
+
+  &.colored {
+    color: var(--color-fourth-dark);
+  }
 }
 
 .heading-fifth {

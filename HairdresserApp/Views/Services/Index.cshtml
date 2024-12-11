@@ -10,7 +10,7 @@
                 @await Component.InvokeAsync("Card", new HairdresserApp.Models.CardModel
        {
            Title = profession.Name,
-           Description = "Explore our skilled professionals in " + profession.Name + ".",
+           Description = profession.Description,
            ImageUrl = "/img/p-" + profession.Id + ".png",
            AspController = "Process",
            AspAction = "GetProcessesByProfession",

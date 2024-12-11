@@ -1,0 +1,75 @@
+.flat-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--color-fourth-dark);
+  border-radius: 8px;
+  width: 100%;
+  padding: 1.6rem;
+  margin: 0.8rem 0;
+  background-color: var(--color-tertiary-light);
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-0.4rem);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.flat-card-icon {
+  flex: 0 0 auto;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flat-card-img {
+  width: 8rem;
+  height: 8rem;
+  margin-left: 1rem;
+}
+
+.icon-placeholder {
+  width: 10rem;
+  height: 10rem;
+}
+
+.flat-card-content {
+  flex: 1;
+  margin-left: 1.6rem;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: max-content 1fr;
+  align-self: stretch;
+  justify-content: center;
+  margin-left: 2rem;
+}
+
+.flat-card-text {
+  align-self: center;
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 2;
+}
+
+.flat-card-title {
+  grid-column: 1 / span 1;
+  grid-row: 1/ span 1;
+  justify-self: left;
+  align-self: center;
+}
+
+.flat-card-description {
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
+  align-self: center;
+}
+
+.flat-card-button {
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 1;
+  justify-self: right;
+  align-self: stretch;
+}

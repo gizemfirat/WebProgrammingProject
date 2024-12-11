@@ -1,0 +1,22 @@
+@model HairdresserApp.Models.FlatCardModel
+
+<div class="flat-card">
+  <div class="flat-card-icon">
+    <img src="@Model.ImageUrl" alt="flat-card-icon" class="flat-card-img" />
+    <div class="icon-placeholder"></div>
+  </div>
+  <div class="flat-card-content">
+    <div class="flat-card-text">
+      <div class="flat-card-title">
+        <h3 class="heading-fourth colored"> @Model.Title</h3>
+      </div>
+      <div class="flat-card-description">
+        <p class="paragraph big"> @Model.Description</p>
+      </div>
+    </div>
+    <div class="flat-card-button">
+      <button asp-action="@Model.AspAction" asp-controller="@Model.AspController"
+        class="btn btn-rounded">@Model.ButtonText</button>
+    </div>
+  </div>
+</div>

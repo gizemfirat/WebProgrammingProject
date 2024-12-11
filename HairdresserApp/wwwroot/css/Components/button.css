@@ -51,6 +51,22 @@
       color: var(--color-tertiary-light);
     }
   }
+
+  &.btn-rounded {
+    padding: 0.8rem 1.6rem;
+    font-size: 1.4rem;
+    color: var(--color-fourth-dark);
+    border: 1px solid var(--color-fourth-dark);
+    background: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: var(--color-fourth-dark);
+      color: var(--color-tertiary-light);
+    }
+  }
 }
 
 .button-card {
