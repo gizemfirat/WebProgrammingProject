@@ -50,6 +50,11 @@
             <a asp-action="Index" class="header-link">Contact us</a>
         </div>
 
+        <div class="header-item">
+            <a asp-action="GetAvaliableTimesWithWorkers" asp-controller="AvaliableTime" class="header-link">Contact
+                us</a>
+        </div>
+
         <div class="header-login-item">
             <img src="/img/circle-user.png" alt="menu-item-3" class="header-login-logo" />
             @if (Context.Session.GetString("customerId") is not null)

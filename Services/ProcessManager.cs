@@ -19,26 +19,31 @@ namespace Services
     public Process? GetProcess(int id, bool trackChanges)
     {
       var Process = _manager.Process.GetProcess(id, trackChanges);
-      if(Process is null) {
+      if (Process is null)
+      {
         throw new Exception("Process not found");
       }
 
       return Process;
     }
 
-     public void AddProcess(Process process)
-        {
-            _manager.Process.AddProcess(process);
-        }
+    public void AddProcess(Process process)
+    {
+      _manager.Process.AddProcess(process);
+    }
 
-        public void DeleteProcess(Process process)
-        {
-            _manager.Process.DeleteProcess(process);
-        }
+    public void DeleteProcess(Process process)
+    {
+      _manager.Process.DeleteProcess(process);
+    }
 
-        public void UpdateProcess(Process process)
-        {
-            _manager.Process.UpdateProcess(process);
-        }
+    public void UpdateProcess(Process process)
+    {
+      _manager.Process.UpdateProcess(process);
+    }
+    public IEnumerable<Process> GetProcessesByProfession(int professionId)
+    {
+      return _manager.Process.GetProcessesByProfessionId(professionId);
+    }
   }
 }

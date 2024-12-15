@@ -15,10 +15,7 @@
           <h5 class="heading-sixth"> @time.Time.ToString("yyyy-MM-dd HH:mm")</h5>
           <h5 class="heading-sixth dark">@(time.IsAvaliable == 1 ? "Avaliable" : "Not Avaliable")</h5>
         </div>
-        <div class="appointment-footer">
-          <a href="@Url.Action("BookAppointment", "Appointment",
-          new { avaliableTimeId = time.Id, workerId = time.Worker })" class="btn btn-primary">Book</a>
-        </div>
+        <div class="appointment-footer"></div>
       </div>
     }
   </div>

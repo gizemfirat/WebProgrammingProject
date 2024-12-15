@@ -10,9 +10,10 @@ namespace Repositories.Contracts
     void AddAppointment(Appointment appointment);
     void DeleteAppointment(Appointment appointment);
     void UpdateAppointment(Appointment appointment);
-    IEnumerable<AppointmentViewModel> GetAppointmentByCustomerId(int customerId);
     Task<Appointment> GetByIdAsync(int id);
     Task DeleteAsync(Appointment appointment);
     void Create(Appointment appointment);
+    bool SaveAppointment(int avaliableTimeId, int customerId);
+    List<AppointmentDetailDto> GetAppointmentsByCustomer(int customerId);
   }
 }

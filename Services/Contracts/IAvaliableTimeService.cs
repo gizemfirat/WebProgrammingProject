@@ -1,4 +1,5 @@
 using Entities.Models;
+using Entities.ViewModels;
 
 namespace Services.Contracts
 {
@@ -9,5 +10,7 @@ namespace Services.Contracts
     void AddAvaliableTime(AvaliableTime avaliableTime);
     void DeleteAvaliableTime(AvaliableTime avaliableTime);
     void UpdateAvaliableTime(AvaliableTime avaliableTime);
+    IEnumerable<AvaliableTimeDto> GetAvaliableiTimesByWorker(int workerId);
+    List<ProcessDetailViewModel> GetAvaliableTimesByProcess(int processId);
   }
 }

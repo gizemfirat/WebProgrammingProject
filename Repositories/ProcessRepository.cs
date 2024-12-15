@@ -33,5 +33,12 @@ namespace Repositories
       Update(process);
       _context.SaveChanges();
     }
+
+    public IEnumerable<Process> GetProcessesByProfessionId(int professionId)
+    {
+      return _context.Processes
+      .Where(p => p.ProfessionId == professionId)
+      .ToList();
+    }
   }
 }

@@ -1,4 +1,5 @@
 using Entities.Models;
+using Entities.ViewModels;
 
 namespace Repositories.Contracts
 {
@@ -11,5 +12,7 @@ namespace Repositories.Contracts
     void UpdateAvaliableTime(AvaliableTime avaliableTime);
     Task<AvaliableTime> GetByIdAsync(int id);
     Task UpdateAsync(AvaliableTime avaliableTime);
+     IEnumerable<AvaliableTimeDto> GetAvaliableTimesByWorkerId(int workerId);
+    List<ProcessDetailViewModel> GetAvaliableTimesForProcess(int processId);
   }
 }

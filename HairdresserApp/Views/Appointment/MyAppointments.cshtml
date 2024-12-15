@@ -1,52 +1,30 @@
-@model IEnumerable<Entities.ViewModels.AppointmentViewModel>
+@model IEnumerable<Entities.ViewModels.AppointmentDetailDto>
 
-<div class="section-appointments">
-  <h2 class="heading-fifth"> My appointments</h2>
-  <table class="appointments-table">
+<h1>My Appointments</h1>
+
+<table class="table">
     <thead>
-      <tr>
-        <th>Date</th>
-        <th>Worker</th>
-        <th>Profession</th>
-        <th>Price</th>
-        <th></th>
-      </tr>
+        <tr>
+            <th>Process Name</th>
+            <th>Worker Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Price</th>
+        </tr>
     </thead>
     <tbody>
-      @foreach (var appointment in Model)
-      {
-        <tr>
-          <td>@appointment.Date.ToString("yyyy-MM-dd HH:mm")</td>
-          <td>@appointment.WorkerName</td>
-          <td>@appointment.ProfessionName</td>
-          <td>@appointment.Price tl</td>
-          <td>
-            <button class="btn btn-primary" onclick="openModal(@appointment.AppointmentId, '@appointment.Date', '@appointment.WorkerName')">
-              Delete
-            </button>
-          </td>
-        </tr>
-      }
+        @foreach (var appointment in Model)
+        {
+            <tr>
+                <td>@appointment.ProcessName</td>
+                <td>@appointment.WorkerFullName</td>
+                <td>@appointment.Date.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@appointment.EstablishedTime minutes</td>
+                <td>@appointment.Price ₺</td>
+            </tr>
+        }
     </tbody>
-  </table>
-</div>
-
-<div id="deleteModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <span class="close-button" onclick="closeModal()">x</span>
-      <h2 class="heading-fifth"> Confirm Delete</h2>
-    </div>
-    <div class="modal-body">
-      <p class="modal-paragraph u-margin-bottom-2"> Are you sure you want to delete this appointment?</p>
-      <p class="modal-paragraph" id="modal-appointment-details"></p>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-outlined" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" id="confirmDeleteButton">Delete</button>
-    </div>
-  </div>
-</div>
+</table>
 
 <script>
   let deleteAppointmentId;

@@ -9,5 +9,6 @@ namespace Services.Contracts
     void AddProcess(Process process);
     void DeleteProcess(Process process);
     void UpdateProcess(Process process);
+    IEnumerable<Process> GetProcessesByProfession(int professionId);
   }
 }

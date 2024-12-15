@@ -1,0 +1,85 @@
+@model List<Entities.ViewModels.ProcessDetailViewModel>
+
+<h2>Available Times for Process</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>avaliableTimeId</th>
+            <th>Process Name</th>
+            <th>Worker Name</th>
+            <th>Avaliable Time</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.AvaliableTimeId</td>
+                <td>@item.ProcessName</td>
+                <td>@item.WorkerName</td>
+                <td>@item.AvaliableTime</td>
+                <td>@item.Price</td>
+                <td>
+                    <button class="btn btn-primay" onclick="openModal(@item.AvaliableTimeId)">Book</button>
+                    <script>console.log('ID:', @item.AvaliableTimeId);</script>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="bookingModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close-button" onclick="clodeModal()">x</span>
+            <h2 class="heading-fifth">Confirm Booking</h2>
+        </div>
+        <div class="modal-body u-margin-bottom-2">
+            <p id="modal-details"></p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-outlined" ondblclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" id="confirmButton">Book</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function bookAppointment(avaliableTimeId) {
+        fetch(`/api/Appointment/BookAppointment`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ avaliableTimeId: avaliableTimeId })
+        })
+            .then(async response => {
+                if (response.ok) {
+                    alert("Appointment successfully booked!");
+                    location.reload();
+                } else {
+                    const errorMessage = await response.text();
+                    console.error("Error:", errorMessage);
+                    alert("Failed to book the appointment: " + errorMessage);
+                }
+            })
+            .catch(error => {
+                console.error("Fetch error:", error);
+                alert("An error occurred while booking the appointment.");
+            });
+    }
+
+    function openModal(avaliableTimeId) {
+        console.log("openModal called with avaliableTimeId:", avaliableTimeId);
+        document.getElementById("modal-details").textContent = "Are you sure you want to make an appointment?";
+        document.getElementById("confirmButton").onclick = function () {
+            bookAppointment(avaliableTimeId);
+        };
+        document.getElementById("bookingModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("bookingModal").style.display = "none";
+    }
+</script>

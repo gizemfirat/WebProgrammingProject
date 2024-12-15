@@ -65,5 +65,10 @@ namespace HairdresserApp.Controllers
 
       return View(workers);
     }
+
+    public IActionResult AvaliableTimes(int processId) {
+      var avaliableTimes = _manager.AvaliableTimeService.GetAvaliableTimesByProcess(processId);
+      return View(avaliableTimes);
+    }
   }
 }

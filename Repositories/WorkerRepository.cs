@@ -32,21 +32,15 @@ namespace Repositories
     public void UpdateWorker(Worker worker)
     {
       Update(worker);
-      _context.SaveChanges();
+      _context.SaveChanges(); 
     }
 
-        public IEnumerable<Worker> GetWorkersByProfessionId(int professionId, bool trackChanges)
-        {
-            return trackChanges
-            ? _context.Set<Worker>().Where(w => w.Profession == professionId).ToList()
-            : _context.Set<Worker>().Where(w => w.Profession == professionId).AsNoTracking().ToList();
-        }
-
-        public IEnumerable<AvaliableTime> GetAvaliableTimesForWorker(int workerId, bool trackChanges)
-        {
-          return trackChanges
-          ? _context.AvaliableTimes.Where(at => at.Worker == workerId).ToList()
-          : _context.AvaliableTimes.Where(at => at.Worker == workerId).AsNoTracking().ToList();
-        }
+    public IEnumerable<Worker> GetWorkersByProcessId(int processId)
+    {
+      return _context.WorkerProcesses
+      .Where(wp => wp.ProcessId == processId)
+      .Select(wp => _context.Workers.FirstOrDefault(w => w.Id == wp.WorkerId))
+      .ToList();
     }
+  }
 }

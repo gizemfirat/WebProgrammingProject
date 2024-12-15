@@ -12,9 +12,8 @@ namespace HairdresserApp.Controllers
     }
 
     public IActionResult Index(int professionId) {
-      var workers = _manager.WorkerService.GetWorkesrByProfessionId(professionId, false);
 
-      return View(workers);
+      return View();
     }
   }
 }

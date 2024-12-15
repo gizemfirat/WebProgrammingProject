@@ -9,8 +9,6 @@ namespace Repositories.Contracts
     void AddWorker(Worker worker);
     void DeleteWorker(Worker worker);
     void UpdateWorker(Worker worker);
-
-    IEnumerable<AvaliableTime> GetAvaliableTimesForWorker(int workerId, bool trackChanges);
-    IEnumerable<Worker> GetWorkersByProfessionId(int professionId, bool trackChanges);
+    IEnumerable<Worker> GetWorkersByProcessId(int processId);
   }
 }

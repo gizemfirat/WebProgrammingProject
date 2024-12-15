@@ -15,16 +15,16 @@
   justify-content:space-between;
   align-items: center;
   width: 17%;
-  background-color: var(--color-fourth-lightest);
+  background-color: none;
   border-radius: 10px;
-  border: 1px solid var(--color-grey);
+  border: 1px solid var(--color-fourth-dark);
   overflow: hidden;
   transition: all .3s;
 
   &:hover {
-    transform: translateY(-1rem);
-    box-shadow: -2px 13px 19px -6px rgba(0,0,0,0.39);
-    border: 1px solid var(--color-grey-dark);
+    transform: translateY(-2rem);
+
+    border: 1px solid var(--color-fourth-darkest);
   }
 
 }

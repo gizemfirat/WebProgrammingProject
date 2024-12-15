@@ -36,40 +36,65 @@ namespace Repositories
       _context.SaveChanges();
     }
 
-        public IEnumerable<AppointmentViewModel> GetAppointmentByCustomerId(int customerId)
-        {
-          var appointments = from a in _context.Appointments
-                            join w in _context.Workers on a.Worker equals w.Id
-                            join p in _context.Professions on w.Profession equals p.Id
-                            join at in _context.AvaliableTimes on a.Date equals at.Id
-                            where a.Customer == customerId
-                            select new AppointmentViewModel
-                            {
-                              AppointmentId = a.Id,
-                              Date = at.Time,
-                              WorkerName = w.Name + " " + w.Surname,
-                              ProfessionName = p.Name,
-                              Price = p.Price
-                            };
-                            
-                            return appointments.ToList();
-        }
-
-        public async Task<Appointment> GetByIdAsync(int id)
-        {
-          return await _context.Set<Appointment>().FindAsync(id);   
-        }
-
-        public async Task DeleteAsync(Appointment appointment)
-        {
-            _context.Set<Appointment>().Remove(appointment);
-            await _context.SaveChangesAsync();
-        }
-
-        public void Create(Appointment appointment)
-        {
-            _context.Appointments.Add(appointment);
-            _context.SaveChanges();
-        }
+    public async Task<Appointment> GetByIdAsync(int id)
+    {
+      return await _context.Set<Appointment>().FindAsync(id);
     }
+
+    public async Task DeleteAsync(Appointment appointment)
+    {
+      _context.Set<Appointment>().Remove(appointment);
+      await _context.SaveChangesAsync();
+    }
+
+    public void Create(Appointment appointment)
+    {
+      _context.Appointments.Add(appointment);
+      _context.SaveChanges();
+    }
+
+    public bool SaveAppointment(int avaliableTimeId, int customerId)
+    {
+      var avaliableTime = _context.AvaliableTimes.FirstOrDefault(a => a.Id == avaliableTimeId);
+
+      if (avaliableTime == null || avaliableTime.IsAvaliable == 0)
+      {
+        return false;
+      }
+
+      var appointment = new Appointment
+      {
+        AvaliableTimeId = avaliableTimeId,
+        CustomerId = customerId
+      };
+
+      _context.Appointments.Add(appointment);
+
+      avaliableTime.IsAvaliable = 0;
+      _context.SaveChanges();
+
+      return true;
+    }
+
+    public List<AppointmentDetailDto> GetAppointmentsByCustomer(int customerId)
+    {
+      var appointments = (from a in _context.Set<Appointment>()
+                          join at in _context.Set<AvaliableTime>() on a.AvaliableTimeId equals at.Id
+                          join wp in _context.Set<WorkerProcess>() on at.WorkerProcessId equals wp.Id
+                          join w in _context.Set<Worker>() on wp.WorkerId equals w.Id
+                          join p in _context.Set<Process>() on wp.ProcessId equals p.Id
+                          where a.CustomerId == customerId
+                          select new AppointmentDetailDto
+                          {
+                            AppointmentId = a.Id,
+                            ProcessName = p.Name,
+                            WorkerFullName = w.Name + " " + w.Surname,
+                            Date = at.Time,
+                            EstablishedTime = p.Time,
+                            Price = p.Price
+                          }).ToList();
+
+      return appointments;
+    }
+  }
 }
