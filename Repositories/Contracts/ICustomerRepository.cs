@@ -9,5 +9,7 @@ namespace Repositories.Contracts
     void AddCustomer(Customer customer);
     void DeleteCustomer(Customer customer);
     void UpdateCustomer(Customer customer);
+    Task<Customer> GetCustomerByEmailAsync(String email);
+  
   }
 }

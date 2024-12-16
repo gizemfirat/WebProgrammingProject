@@ -18,9 +18,9 @@ namespace HairdresserApp.Controllers
       return View();
     }
 
-    public IActionResult Login(string username, string password) {
+    public IActionResult Login(string email, string password) {
       var customer = _manager.CustomerService.GetCustomers(false)
-      .FirstOrDefault(c => c.Username == username && c.Password == password);
+      .FirstOrDefault(c => c.Email == email && c.Password == password);
 
       if(customer != null) {
         HttpContext.Session.SetString("customerId", customer.Id.ToString());

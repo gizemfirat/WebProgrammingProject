@@ -24,11 +24,11 @@ namespace HairdresserApp.Controllers
 
     [HttpGet("MyAppointments")]
     public IActionResult MyAppointments() {
-      if(string.IsNullOrEmpty(HttpContext.Session.GetString("customerId"))) {
+      if(HttpContext.Session.GetInt32("customerId") is null) {
         return RedirectToAction("Login", "Login");
       }
 
-      int customerId = int.Parse(HttpContext.Session.GetString("customerId"));
+      int customerId = (int)HttpContext.Session.GetInt32("customerId");
       var appointments = _manager.AppointmentService.GetAppointmentsByCustomer(customerId);
 
       return View(appointments);
@@ -36,13 +36,13 @@ namespace HairdresserApp.Controllers
 
     [HttpPost("BookAppointment")]
     public IActionResult BookAppointment([FromBody] AppointmentRequest request) {
-      var customerId = HttpContext.Session.GetString("customerId");
+      var customerId = HttpContext.Session.GetInt32("customerId");
 
       if(customerId == null) {
         return Unauthorized();
       }
 
-      var success = _manager.AppointmentService.SaveAppointment(request.AvaliableTimeId, int.Parse(customerId));
+      var success = _manager.AppointmentService.SaveAppointment(request.AvaliableTimeId, (int)customerId);
 
       if(!success) {
         return BadRequest("Appointment could not be created.");

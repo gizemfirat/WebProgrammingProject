@@ -8,13 +8,13 @@
 
   &.btn-primary {
     border-radius: 5px;
-    background-color: var(--color-fourth);
+    background-color: var(--color-fourth-dark);
     border: 1px solid var(--color-fourth-dark);
     color: var(--color-tertiary-light);
-    transition: all .2s ease;
+    transition: all .4s ease;
 
     &:hover {
-      background-color: var(--color-fourth-dark);
+      background-color: var(--color-fourth-darkest);
       outline: 1px solid var(--color-fourth-darker);
     }
   }
@@ -53,18 +53,32 @@
   }
 
   &.btn-rounded {
-    padding: 0.8rem 1.6rem;
+    padding: 0.8rem 4rem;
     font-size: 1.4rem;
     color: var(--color-fourth-dark);
     border: 1px solid var(--color-fourth-dark);
     background: none;
-    border-radius: 4px;
+    border-radius: 50px;
     cursor: pointer;
     transition: all 0.2s ease;
 
     &:hover {
       background-color: var(--color-fourth-dark);
       color: var(--color-tertiary-light);
+    }
+  }
+
+  &.btn-link {
+    padding: 1rem 1rem;
+    border: none;
+    font-size: 1.6rem;
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-black);
+    cursor: pointer;
+    transition: all .4s ease;
+
+    &:hover {
+      color: var(--color-fourth-dark);
     }
   }
 }

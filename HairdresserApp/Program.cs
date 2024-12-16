@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Repositories;
 using Repositories.Contracts;
 using Services;
@@ -10,10 +12,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 
-builder.Services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.User.RequireUniqueEmail = true;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireDigit = false;
+}).AddEntityFrameworkStores<RepositoryContext>()
+.AddDefaultTokenProviders();
+
+builder.Services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),  b => b.MigrationsAssembly("HairdresserApp")));
 
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
-builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
 builder.Services.AddScoped<IProfessionRepository, ProfessionRepository>();
@@ -23,7 +34,6 @@ builder.Services.AddScoped<IProcessRepository, ProcessRepository>();
 builder.Services.AddScoped<IWorkerProcessRepository, WorkerProcessRepository>();
 
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
-builder.Services.AddScoped<IAdminService, AdminManager>();
 builder.Services.AddScoped<ICustomerService, CustomerManager>();
 builder.Services.AddScoped<IWorkerService, WorkerManager>();
 builder.Services.AddScoped<IProfessionService, ProfessionManager>();
@@ -33,6 +43,12 @@ builder.Services.AddScoped<IProcessService, ProcessManager>();
 builder.Services.AddScoped<IWorkerProcessService, WorkerProcessManager>();
 
 var app = builder.Build();
+
+using(var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await SeedData.Initialize(services);
+}
 
 
 if (!app.Environment.IsDevelopment())

@@ -1,0 +1,50 @@
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  align-items: center;
+  width: 45%;
+  background-color: none;
+  border-radius: 10px;
+  border: 1px solid var(--color-fourth-dark);
+  overflow: hidden;
+  transition: all .6s;
+
+  &:hover {
+    transform: translateY(-2rem);
+
+    border: 1px solid var(--color-fourth-darkest);
+  }
+
+}
+
+.menu-card-header {
+  padding: 2rem;
+}
+
+.menu-card-icon {
+  height: 10rem;
+}
+
+.menu-card-content {
+  padding: 1rem;
+
+}
+
+.menu-card-title {
+  text-align: center;
+}
+
+.menu-card-description {
+  text-align: justify;
+  padding: 2rem;
+}
+
+.menu-card-button {
+  width: 100%;
+  margin-top: auto;
+}
+
+.menu-card-data {
+  text-align: right;
+}

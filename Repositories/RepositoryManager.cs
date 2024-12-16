@@ -6,7 +6,6 @@ namespace Repositories
   {
 
     private readonly RepositoryContext _context;
-    private readonly IAdminRepository _adminRepository;
     private readonly ICustomerRepository _customerRepository;
     private readonly IWorkerRepository _workerRepository;
     private readonly IProfessionRepository _professionRepository;
@@ -15,10 +14,9 @@ namespace Repositories
     private readonly IProcessRepository _processRepository;
     private readonly IWorkerProcessRepository _workerProcessRepository;
 
-    public RepositoryManager(RepositoryContext context, IAdminRepository adminRepository, ICustomerRepository customerRepository, IWorkerRepository workerRepository, IProfessionRepository professionRepository, IAvaliableTimeRepository avaliableTimeRepository, IAppointmentRepository appointmentRepository, IProcessRepository processRepository, IWorkerProcessRepository workerProcessRepository)
+    public RepositoryManager(RepositoryContext context, ICustomerRepository customerRepository, IWorkerRepository workerRepository, IProfessionRepository professionRepository, IAvaliableTimeRepository avaliableTimeRepository, IAppointmentRepository appointmentRepository, IProcessRepository processRepository, IWorkerProcessRepository workerProcessRepository)
     {
       _context = context;
-      _adminRepository = adminRepository;
       _customerRepository = customerRepository;
       _workerRepository = workerRepository;
       _professionRepository = professionRepository;
@@ -28,7 +26,6 @@ namespace Repositories
       _workerProcessRepository = workerProcessRepository;
     }
 
-    public IAdminRepository Admin => _adminRepository;
 
     public ICustomerRepository Customer => _customerRepository;
 

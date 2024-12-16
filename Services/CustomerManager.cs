@@ -40,5 +40,10 @@ namespace Services
         {
             _manager.Customer.UpdateCustomer(customer);
         }
-  }
+
+        public async Task<Customer> GetCustomerByEmailAsync(string email)
+        {
+            return await _manager.Customer.GetCustomerByEmailAsync(email);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-@model Entities.Models.Customer;
+@model LoginViewModel
 
 <div class="section-login">
   <div class="section-cover">
@@ -18,8 +18,12 @@
         <label asp-for="Password" class="login-form-label"> Password </label>
         <input asp-for="Password" class="login-form-input" type="password" />
       </div>
+      <div class="form-check">
+        <input asp-for="RememberMe" class="form-check-input" type="checkbox" />
+        <label asp-for="RememberMe" class="form-check-label"></label>
+      </div>
       <div class="login-form-group">
-        <button asp-controller="Login" asp-action="Login" type="submit" class="btn btn-primary">Sign In</button>
+        <button asp-controller="Account" asp-action="Login" type="submit" class="btn btn-primary">Sign In</button>
       </div>
       <div class="login-form-group">
         <label class="login-form-label">Don't have an account? Create one!</label>

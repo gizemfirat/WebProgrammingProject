@@ -1,11 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Entities.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Repositories
 {
-  public class RepositoryContext : DbContext
+  public class RepositoryContext : IdentityDbContext<IdentityUser>
   {
-    public DbSet<Admin> Admins {get; set;}
     public DbSet<Customer> Customers {get; set;}
     public DbSet<Worker> Workers {get; set;}
     public DbSet<Profession> Professions {get; set;}

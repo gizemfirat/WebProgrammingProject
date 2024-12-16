@@ -1,4 +1,5 @@
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using Repositories.Contracts;
 
 namespace Repositories
@@ -33,5 +34,12 @@ namespace Repositories
       Update(customer);
       _context.SaveChanges();
     }
-  }
+
+        public async Task<Customer> GetCustomerByEmailAsync(string email)
+        {
+            return await _context.Customers
+            .Where(c => c.Email == email)
+            .FirstOrDefaultAsync();
+        }
+    }
 }

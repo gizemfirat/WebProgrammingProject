@@ -10,6 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></link>
     <link rel="stylesheet" href="~/css/Home/Index.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Login/Index.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Register/Index.css" asp-append-version="true" />
@@ -21,6 +22,7 @@
     <link rel="stylesheet" href="~/css/Components/button.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Components/modal.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Components/card.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Components/menuCard.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Components/flatCard.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/utilities.css" asp-append-version="true" />
@@ -40,7 +42,7 @@
         <div class="header-item">
             <a asp-controller="Services" asp-action="Index" class="header-link">Services</a>
         </div>
-        @if (Context.Session.GetString("customerId") is not null)
+        @if (Context.Session.GetInt32("customerId") is not null)
         {
             <div class="header-item">
                 <a asp-controller="Appointment" asp-action="MyAppointments" class="header-link">My Appointments</a>
@@ -49,21 +51,17 @@
         <div class="header-item">
             <a asp-action="Index" class="header-link">Contact us</a>
         </div>
-
-        <div class="header-item">
-            <a asp-action="GetAvaliableTimesWithWorkers" asp-controller="AvaliableTime" class="header-link">Contact
-                us</a>
-        </div>
-
         <div class="header-login-item">
             <img src="/img/circle-user.png" alt="menu-item-3" class="header-login-logo" />
-            @if (Context.Session.GetString("customerId") is not null)
+            @if (User.Identity.IsAuthenticated || Context.Session.GetInt32("customerId") is not null)
             {
-                <a class="header-link" asp-controller="Login" asp-action="Logout">Logout</a>
+                <form asp-controller="Account" asp-action="Logout" method="post">
+                    <button type="submit" class="btn btn-link">Logout</button>
+                </form>
             }
             else
             {
-                <a class="header-link" asp-controller="Login" asp-action="Index"> Login </a>
+                <a class="header-link" asp-controller="Account" asp-action="Login"> Login </a>
             }
 
         </div>
@@ -74,6 +72,10 @@
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="
+https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js
+"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
