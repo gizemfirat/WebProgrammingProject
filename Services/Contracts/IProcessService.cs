@@ -1,4 +1,5 @@
 using Entities.Models;
+using Entities.ViewModels;
 
 namespace Services.Contracts
 {
@@ -10,5 +11,6 @@ namespace Services.Contracts
     void DeleteProcess(Process process);
     void UpdateProcess(Process process);
     IEnumerable<Process> GetProcessesByProfession(int professionId);
+    IEnumerable<ProcessGroupDto> GetGroupedProcesses();
   }
 }

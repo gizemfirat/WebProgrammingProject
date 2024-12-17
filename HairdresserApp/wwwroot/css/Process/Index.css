@@ -59,3 +59,76 @@
   grid-row: 1 / -1;
   align-self: center;
 }
+
+.section-process {
+  display: flex;
+  padding: 3rem;
+  margin: 3rem;
+  justify-content: space-evenly;
+  border: 1px solid var(--color-fourth);
+  background: radial-gradient(circle, transparent 20%, #97A7F4 20%, #97A7F4 80%, transparent 80%, transparent) 0% 0% / 100px 100px, radial-gradient(circle, transparent 20%, #97A7F4 20%, #97A7F4 80%, transparent 80%, transparent) 50px 50px / 100px 100px, linear-gradient(#ECEFED 2px, transparent 2px) 0px -1px / 50px 50px, linear-gradient(90deg, #ECEFED 2px, #97A7F4 2px) -1px 0px / 50px 50px #97A7F4;
+	background-size: 100px 100px, 100px 100px, 50px 50px, 50px 50px;
+	background-color: #97A7F4;
+}
+
+.process-box {
+  background-color: var(--color-tertiary-light);
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  margin: 3rem;
+  justify-content: space-evenly;
+}
+
+.process-group {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  transition: all .3s;
+}
+
+.process-group:hover {
+  transform: translateY(-5px);
+}
+
+.process-item {
+  display: flex;
+}
+
+.process-items {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.process-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.process-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-color: #007bff;
+}
+
+
+.process-item p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+  .process-group {
+      padding: 10px;
+  }
+
+  .process-group h2 {
+      font-size: 1.25rem;
+  }
+
+  .process-item p {
+      font-size: 0.9rem;
+  }
+}

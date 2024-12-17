@@ -71,16 +71,9 @@ namespace HairdresserApp.Controllers
       return View(avaliableTimes);
     }
 
-        public IActionResult GetEvents()
-    {
-        var events = new[]
-        {
-            new { title = "Randevu 1", start = "2024-06-15T10:00:00", end = "2024-06-15T12:00:00" },
-            new { title = "Randevu 2", start = "2024-06-16T14:00:00", end = "2024-06-16T15:00:00" },
-            new { title = "Randevu 3", start = "2024-06-20T09:00:00", end = "2024-06-20T10:30:00" }
-        };
-
-        return Json(events);
+    public IActionResult ProcessList() {
+      var processes = _manager.ProcessService.GetGroupedProcesses();
+      return View(processes);
     }
   }
 }

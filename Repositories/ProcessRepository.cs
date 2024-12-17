@@ -1,4 +1,5 @@
 using Entities.Models;
+using Entities.ViewModels;
 using Repositories.Contracts;
 
 namespace Repositories
@@ -39,6 +40,28 @@ namespace Repositories
       return _context.Processes
       .Where(p => p.ProfessionId == professionId)
       .ToList();
+    }
+
+    public IEnumerable<ProcessGroupDto> GetProcessesGroupedByProfession()
+    {
+      var result = _context.Processes
+                   .Join(_context.Professions,
+                         process => process.ProfessionId,
+                         profession => profession.Id,
+                         (process, profession) => new
+                         {
+                           process,
+                           profession.Name
+                         })
+                   .GroupBy(p => new { p.process.ProfessionId, p.Name })
+                   .Select(g => new ProcessGroupDto
+                   {
+                     ProfessionId = g.Key.ProfessionId,
+                     ProfessionName = g.Key.Name,
+                     Processes = g.Select(x => x.process).ToList()
+                   })
+                   .ToList();
+      return result;
     }
   }
 }

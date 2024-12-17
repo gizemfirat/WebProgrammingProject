@@ -1,6 +1,7 @@
 using Services.Contracts;
 using Entities.Models;
 using Repositories.Contracts;
+using Entities.ViewModels;
 
 namespace Services
 {
@@ -45,5 +46,10 @@ namespace Services
     {
       return _manager.Process.GetProcessesByProfessionId(professionId);
     }
-  }
+
+        public IEnumerable<ProcessGroupDto> GetGroupedProcesses()
+        {
+            return _manager.Process.GetProcessesGroupedByProfession();
+        }
+    }
 }

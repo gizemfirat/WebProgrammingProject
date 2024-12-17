@@ -30,6 +30,11 @@
     font-size: 3rem;
     color: var(--color-fourth-dark);
   }
+
+  &.big {
+    font-size: 3rem;
+    text-transform: uppercase;
+  }
 }
 
 .heading-tertiary {

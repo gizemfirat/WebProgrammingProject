@@ -1,0 +1,28 @@
+@model IEnumerable<Entities.ViewModels.ProcessGroupDto>
+
+<div class="section-process">
+  <div class="process-box">
+    @foreach (var group in Model)
+    {
+      <div class="process-group">
+        <h2 class="heading-secondary big u-center-text">@group.ProfessionName</h2>
+        <span class="u-border-bottom full-width"></span>
+        <div class="process-items">
+          @foreach (var process in group.Processes)
+          {
+            <div class="process-item">
+              <table>
+                <tr>
+                  <td>@process.Name</td>
+                  <td>Approximately @process.Time minutes</td>
+                  <td>@process.Price</td>
+                </tr>
+              </table>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+</div>

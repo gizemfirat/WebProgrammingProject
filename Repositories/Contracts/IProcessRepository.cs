@@ -1,4 +1,5 @@
 using Entities.Models;
+using Entities.ViewModels;
 
 namespace Repositories.Contracts
 {
@@ -9,6 +10,8 @@ namespace Repositories.Contracts
     void AddProcess(Process process);
     void DeleteProcess(Process process);
     void UpdateProcess(Process process);
-    public IEnumerable<Process> GetProcessesByProfessionId(int professionId);
+    IEnumerable<Process> GetProcessesByProfessionId(int professionId);
+    IEnumerable<ProcessGroupDto> GetProcessesGroupedByProfession();
+
   }
 }
