@@ -2,13 +2,15 @@
 
 <h2>Available Times for Process</h2>
 
+
 <table class="table">
     <thead>
         <tr>
             <th>avaliableTimeId</th>
             <th>Process Name</th>
             <th>Worker Name</th>
-            <th>Avaliable Time</th>
+            <th>Start Time</th>
+            <th>End Time</th>
             <th>Price</th>
             <th></th>
         </tr>
@@ -21,6 +23,7 @@
                 <td>@item.ProcessName</td>
                 <td>@item.WorkerName</td>
                 <td>@item.AvaliableTime</td>
+                <td>@item.EndTime</td>
                 <td>@item.Price</td>
                 <td>
                     <button class="btn btn-primary" onclick="openModal(@item.AvaliableTimeId)">Book</button>

@@ -78,6 +78,7 @@ namespace Repositories
                       ProcessName = process.Name,
                       WorkerName = $"{worker.Name} {worker.Surname}",
                       AvaliableTime = avaliableTime.Time,
+                      EndTime = avaliableTime.EndTime,
                       Price = process.Price
                     }).ToList();
 
