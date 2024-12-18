@@ -63,5 +63,24 @@ namespace Repositories
                    .ToList();
       return result;
     }
+
+    public IEnumerable<ProcessWithProfessionViewModel> GetProcessesWithProfession()
+    {
+      var result = _context.Processes
+                  .Join(_context.Professions,
+                        process => process.ProfessionId,
+                        profession => profession.Id,
+                        (process, profession) => new ProcessWithProfessionViewModel
+                        {
+                          Id = process.Id,
+                          Name = process.Name,
+                          Price = process.Price,
+                          Time = process.Time,
+                          ProfessionId = profession.Id,
+                          ProfessionName = profession.Name
+                        }).ToList();
+
+      return result;
+    }
   }
 }

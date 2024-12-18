@@ -49,6 +49,20 @@
                 <a asp-controller="Appointment" asp-action="MyAppointments" class="header-link">My Appointments</a>
             </div>
         }
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="header-item">
+                <div class="dropdown">
+                    <button class="dropdown-btn">Panel</button>
+                    <div class="dropdown-content">
+                        <a asp-action="GetWorkers" asp-controller="Admin" class="header-link u-margin-bottom-2">Employees</a>
+                        <a asp-action="GetProfessions" asp-controller="Admin" class="header-link u-margin-bottom-2">Professions</a>
+                        <a asp-action="GetProcesses" asp-controller="Admin" class="header-link u-margin-bottom-2">Processes</a>
+                        <a asp-action="GetAvaliableTimes" asp-controller="Admin" class="header-link">Avaliable Times</a>
+                    </div>
+                </div>
+            </div>
+        }
         <div class="header-item">
             <a asp-action="Index" class="header-link">Contact us</a>
         </div>

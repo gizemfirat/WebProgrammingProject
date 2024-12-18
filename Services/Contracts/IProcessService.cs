@@ -12,5 +12,6 @@ namespace Services.Contracts
     void UpdateProcess(Process process);
     IEnumerable<Process> GetProcessesByProfession(int professionId);
     IEnumerable<ProcessGroupDto> GetGroupedProcesses();
+    IEnumerable<ProcessWithProfessionViewModel> GetProcessesWithProfession();
   }
 }

@@ -47,9 +47,14 @@ namespace Services
       return _manager.Process.GetProcessesByProfessionId(professionId);
     }
 
-        public IEnumerable<ProcessGroupDto> GetGroupedProcesses()
-        {
-            return _manager.Process.GetProcessesGroupedByProfession();
-        }
+    public IEnumerable<ProcessGroupDto> GetGroupedProcesses()
+    {
+      return _manager.Process.GetProcessesGroupedByProfession();
     }
+
+    public IEnumerable<ProcessWithProfessionViewModel> GetProcessesWithProfession()
+    {
+      return _manager.Process.GetProcessesWithProfession();
+    }
+  }
 }

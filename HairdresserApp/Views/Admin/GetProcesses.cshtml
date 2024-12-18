@@ -1,0 +1,23 @@
+@model IEnumerable<Entities.ViewModels.ProcessWithProfessionViewModel>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Process</th>
+      <th>Profession</th>
+      <th>Price</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var process in Model)
+    {
+      <tr>
+        <td>@process.Name</td>
+        <td>@process.ProfessionName</td>
+        <td>@process.Price</td>
+        <td>@process.Time ₺</td>
+      </tr>
+    }
+  </tbody>
+</table>

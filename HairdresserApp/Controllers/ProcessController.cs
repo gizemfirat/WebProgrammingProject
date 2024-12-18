@@ -19,6 +19,17 @@ namespace HairdresserApp.Controllers
       return View(processes);
     }
 
+    public IActionResult GetProcesses() {
+      var processes = _manager.ProcessService.GetProcesses(false)
+      .Select(p => new 
+      {
+        Id = p.Id,
+        Name = p.Name
+      }).ToList();
+
+      return Json(processes);
+    }
+
     public IActionResult GetProcessesByProfession(int professionId) {
       var processes = _manager.ProcessService.GetProcesses(false)
       .Where(p => p.ProfessionId == professionId)

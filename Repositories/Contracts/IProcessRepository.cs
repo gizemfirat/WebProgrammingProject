@@ -12,6 +12,7 @@ namespace Repositories.Contracts
     void UpdateProcess(Process process);
     IEnumerable<Process> GetProcessesByProfessionId(int professionId);
     IEnumerable<ProcessGroupDto> GetProcessesGroupedByProfession();
+    IEnumerable<ProcessWithProfessionViewModel> GetProcessesWithProfession();
 
   }
 }

@@ -107,3 +107,43 @@ thead th {
     background-color: var(--color-fourth-dark);
   }
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--color-tertiary-light);
+  border-radius: 5px;
+  width: 20rem;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:stretch;
+}
+
+.dropdown-btn  {
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: var(--color-black-darker);
+  font-weight: 500;
+  letter-spacing: 0.13rem;
+  border: none;
+  font-family: 'Poppins', serif;
+  transition: all .2s;
+
+  &:hover,
+  &:active {
+    color: var(--color-fourth-dark);
+  }
+}
+

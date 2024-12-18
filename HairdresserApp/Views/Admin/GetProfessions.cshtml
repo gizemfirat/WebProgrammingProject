@@ -1,0 +1,19 @@
+@model IEnumerable<Entities.Models.Profession>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Profession</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var profession in Model)
+    {
+      <tr>
+        <td>@profession.Name</td>
+        <td>@profession.Description</td>
+      </tr>
+    }
+  </tbody>
+</table>

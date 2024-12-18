@@ -1,4 +1,5 @@
 using Entities.Models;
+using Entities.ViewModels;
 
 namespace Repositories.Contracts
 {
@@ -10,5 +11,7 @@ namespace Repositories.Contracts
     void DeleteWorker(Worker worker);
     void UpdateWorker(Worker worker);
     IEnumerable<Worker> GetWorkersByProcessId(int processId);
+    Task<IEnumerable<WorkerViewModel>> GetWorkersWithProcessesAsync();
+    Task AddWorkerAsync(Worker worker, List<int> processIds);
   }
 }
