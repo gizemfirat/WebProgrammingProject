@@ -1,6 +1,9 @@
 @model IEnumerable<Entities.ViewModels.ProcessGroupDto>
 
 <div class="section-process">
+  <div class="heading-process">
+    <h3 class="heading-fourth background-color">Our Prices</h3>
+  </div>
   <div class="process-box">
     @foreach (var group in Model)
     {
@@ -11,7 +14,7 @@
           @foreach (var process in group.Processes)
           {
             <div class="process-item">
-              <table>
+              <table class="no-border">
                 <tr>
                   <td>@process.Name</td>
                   <td>Approximately @process.Time minutes</td>

@@ -78,6 +78,10 @@ table {
   font-size: 1.5rem;
   table-layout: fixed;
   border-collapse: collapse;
+
+  &.no-border {
+    border: none;
+  }
 }
 
 td {

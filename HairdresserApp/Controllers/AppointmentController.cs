@@ -51,5 +51,10 @@ namespace HairdresserApp.Controllers
       return Ok("Appointment successfully created.");
     }
 
+      public IActionResult Deneme(int processId) {
+      var avaliableTimes = _manager.AvaliableTimeService.GetAvaliableTimesByProcess(processId);
+      return View(avaliableTimes);
+    }
+
   }
 }

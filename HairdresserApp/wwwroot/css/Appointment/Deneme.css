@@ -1,0 +1,9 @@
+#calendar {
+  width: 60%;
+  margin:0 auto;
+  font-size: 1.4rem;
+}
+
+.fc-toolbar-title {
+  font-size: 2.4rem;
+}

@@ -60,6 +60,15 @@
   align-self: center;
 }
 
+.heading-process {
+  margin-top: 3rem;
+}
+
+.background-color {
+  background-color: var(--color-tertiary-light);
+  padding: 1.2rem 2rem;
+}
+
 .section-process {
   display: flex;
   padding: 3rem;
@@ -84,15 +93,16 @@
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  transition: all .3s;
-}
-
-.process-group:hover {
-  transform: translateY(-5px);
 }
 
 .process-item {
   display: flex;
+  transition: all .3s;
+
+  &:hover {
+    background-color: var(--color-fourth);
+    color: var(--color-tertiary-light);
+  }
 }
 
 .process-items {
@@ -111,17 +121,10 @@
   border-color: #007bff;
 }
 
-
-.process-item p {
-  margin: 5px 0;
-  font-size: 0.95rem;
-  color: #555;
-}
-
 /* Responsive Tasarım */
 @media (max-width: 768px) {
   .process-group {
-      padding: 10px;
+      padding: 1rem;
   }
 
   .process-group h2 {
