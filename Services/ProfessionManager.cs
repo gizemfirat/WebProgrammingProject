@@ -19,26 +19,38 @@ namespace Services
     public Profession? GetProfession(int id, bool trackChanges)
     {
       var profession = _manager.Profession.GetProfession(id, trackChanges);
-      if(profession is null) {
+      if (profession is null)
+      {
         throw new Exception("Profession not found");
       }
 
       return profession;
     }
 
-     public void AddProfession(Profession profession)
-        {
-            _manager.Profession.AddProfession(profession);
-        }
+    public void AddProfession(Profession profession)
+    {
+      _manager.Profession.AddProfession(profession);
+    }
 
-        public void DeleteProfession(Profession profession)
-        {
-            _manager.Profession.DeleteProfession(profession);
-        }
+    public void DeleteProfession(int professionId)
+    {
+      var profession = _manager.Profession.GetProfession(professionId, false);
+      if (profession == null)
+      {
+        throw new Exception("Profession not found!");
+      }
 
-        public void UpdateProfession(Profession profession)
-        {
-            _manager.Profession.UpdateProfession(profession);
-        }
+      _manager.Profession.DeleteProfession(profession);
+    }
+
+    public void UpdateProfession(Profession profession)
+    {
+      _manager.Profession.UpdateProfession(profession);
+    }
+
+    public bool HasProcesses(int professionId)
+    {
+      return _manager.Profession.HasProcesses(professionId);
+    }
   }
 }

@@ -9,5 +9,6 @@ namespace Repositories.Contracts
     void AddProfession(Profession profession);
     void DeleteProfession(Profession profession);
     void UpdateProfession(Profession profession);
+    bool HasProcesses(int professionId);
   }
 }

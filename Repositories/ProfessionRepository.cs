@@ -33,5 +33,10 @@ namespace Repositories
       Update(profession);
       _context.SaveChanges();
     }
-  }
+
+        public bool HasProcesses(int professionId)
+        {
+            return _context.Processes.Any(p => p.ProfessionId == professionId);
+        }
+    }
 }

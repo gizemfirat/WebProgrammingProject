@@ -7,7 +7,8 @@ namespace Services.Contracts
     IEnumerable<Profession> GetProfessions(bool trackChanges);
     Profession? GetProfession(int id, bool trackChanges);
     void AddProfession(Profession profession);
-    void DeleteProfession(Profession profession);
+    void DeleteProfession(int professionId);
     void UpdateProfession(Profession profession);
+    bool HasProcesses(int professionId);
   }
 }
