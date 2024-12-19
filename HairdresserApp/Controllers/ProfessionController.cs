@@ -1,3 +1,4 @@
+using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
 
@@ -12,6 +13,15 @@ namespace HairdresserApp.Controllers
     }
     public IActionResult Index() {
       return View();
+    }
+
+    public IActionResult Create([FromBody] Profession request) {
+      if(request == null || !ModelState.IsValid) {
+        return BadRequest("Invalid Data!");
+      }
+
+      _manager.ProfessionService.AddProfession(request);
+      return Ok(new {message = "Profession added successfully"});
     }
   }
 }

@@ -46,7 +46,7 @@ html {
 
 body {
   background-color: var(--color-tertiary-light);
-  font-family: "Poppins", serif;
+  font-family: 'Poppins', serif;
   font-weight: 400;
 }
 
@@ -73,14 +73,19 @@ table {
   border-collapse: collapse;
   text-align: center;
   vertical-align: middle;
-  width: 100%;
+  width: 80%;
   text-transform: uppercase;
   font-size: 1.5rem;
   table-layout: fixed;
   border-collapse: collapse;
+  justify-self: center;
 
   &.no-border {
     border: none;
+  }
+
+  &.full-width {
+    width: 100%;
   }
 }
 
