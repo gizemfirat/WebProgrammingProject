@@ -33,5 +33,6 @@ namespace HairdresserApp.Controllers
     public IActionResult GetAvaliableTimes() {
       return View();
     }
+
   }
 }

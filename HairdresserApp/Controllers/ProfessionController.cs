@@ -4,6 +4,7 @@ using Services.Contracts;
 
 namespace HairdresserApp.Controllers
 {
+  [Route("Profession")]
   public class ProfessionController : Controller
   {
     private readonly IServiceManager _manager;
@@ -46,23 +47,17 @@ namespace HairdresserApp.Controllers
       return Ok("Profession updated successfully");
     }
 
-    [HttpGet("/api/Profession/HasProcesses")]
-    public IActionResult HasProcesses(int professionId) {
+    [HttpDelete("DeleteProfession/{professionId}")]
+    public async Task<IActionResult> DeleteProfession(int professionId)
+    {
+      var resultMessage = await _manager.ProfessionService.DeleteProfessionAsync(professionId);
 
-      bool hasProcesses = _manager.ProfessionService.HasProcesses(professionId);
-      return Ok(new { hasProcesses });
+      if(resultMessage == "Profession deleted successfully!") {
+        return Json(new {succes = true, message = resultMessage});
+      }
+
+      return Json(new {success = false, message = resultMessage});
     }
 
-    [HttpDelete("/Profession/Delete")]
-    public IActionResult Delete(int professionId) {
-      try
-      {
-        _manager.ProfessionService.DeleteProfession(professionId);
-        return Ok();
-      }
-      catch(Exception ex) {
-        return BadRequest(ex.Message);
-      }
-    }
   }
 }

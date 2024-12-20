@@ -10,5 +10,6 @@ namespace Services.Contracts
     void DeleteProfession(int professionId);
     void UpdateProfession(Profession profession);
     bool HasProcesses(int professionId);
+    Task<String> DeleteProfessionAsync(int professionId);
   }
 }

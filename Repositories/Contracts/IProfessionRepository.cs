@@ -10,5 +10,8 @@ namespace Repositories.Contracts
     void DeleteProfession(Profession profession);
     void UpdateProfession(Profession profession);
     bool HasProcesses(int professionId);
+
+    Task<bool> HasProcessesAsync(int professionId);
+    Task DeleteProfessionAsync(int professionId);
   }
 }

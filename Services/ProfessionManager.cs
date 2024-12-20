@@ -52,5 +52,16 @@ namespace Services
     {
       return _manager.Profession.HasProcesses(professionId);
     }
+
+    public async Task<string> DeleteProfessionAsync(int professionId)
+    {
+      if(await _manager.Profession.HasProcessesAsync(professionId))
+      {
+        return "This profession cannot be deleted. First, delete the processes assosiated with this profession.";
+      }
+
+      await _manager.Profession.DeleteProfessionAsync(professionId);
+      return "Profession deleted successfully!";
+    }
   }
 }
