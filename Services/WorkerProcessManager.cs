@@ -1,6 +1,7 @@
 using Services.Contracts;
 using Entities.Models;
 using Repositories.Contracts;
+using Entities.ViewModels;
 
 namespace Services
 {
@@ -40,5 +41,10 @@ namespace Services
         {
             _manager.WorkerProcess.UpdateWorkerProcess(workerProcess);
         }
-  }
+
+        public List<ProcessDto> GetProcessesByWorkerId(int workerId)
+        {
+          return _manager.WorkerProcess.GetProcessesByWorkerId(workerId);
+        }
+    }
 }

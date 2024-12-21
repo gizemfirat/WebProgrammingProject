@@ -1,4 +1,5 @@
 using Entities.Models;
+using Entities.ViewModels;
 using Repositories.Contracts;
 
 namespace Repositories
@@ -32,6 +33,20 @@ namespace Repositories
     {
       Update(workerProcess);
       _context.SaveChanges();
+    }
+
+    public List<ProcessDto> GetProcessesByWorkerId(int workerId)
+    {
+      var processes = (from wp in _context.WorkerProcesses
+                      join p in _context.Processes on wp.ProcessId equals p.Id
+                      where wp.WorkerId == workerId
+                      select new ProcessDto
+                      {
+                        Id = p.Id,
+                        Name = p.Name
+                      }).ToList();
+
+      return processes;
     }
   }
 }

@@ -1,4 +1,6 @@
+using System.ComponentModel;
 using Entities.Models;
+using Entities.ViewModels;
 
 namespace Repositories.Contracts
 {
@@ -9,5 +11,6 @@ namespace Repositories.Contracts
     void AddWorkerProcess(WorkerProcess workerProcess);
     void DeleteWorkerProcess(WorkerProcess workerProcess);
     void UpdateWorkerProcess(WorkerProcess workerProcess);
+    List<ProcessDto> GetProcessesByWorkerId(int workerId);
   }
 }

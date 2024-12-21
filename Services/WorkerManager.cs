@@ -33,13 +33,26 @@ namespace Services
       _manager.Worker.AddWorker(worker);
     }
 
-    public void DeleteWorker(Worker worker)
+    public void Delete(Worker worker)
     {
       _manager.Worker.DeleteWorker(worker);
     }
 
-    public void UpdateWorker(Worker worker)
+    public void UpdateWorker(WorkerViewModel workerViewModel)
     {
+      var worker = _manager.Worker.GetWorker(workerViewModel.Id, false);
+
+      if(worker == null) {
+        throw new Exception("Worker not found!");
+      }
+
+      worker.Name = workerViewModel.Name;
+      worker.Surname = workerViewModel.Surname;
+      worker.Salary = workerViewModel.Salary;
+
+      var processIds = workerViewModel.Processes.Select(p => p.Id).ToList();
+      _manager.Worker.UpdateWorkerProcesses(workerViewModel.Id, processIds);
+
       _manager.Worker.UpdateWorker(worker);
     }
 
@@ -64,6 +77,22 @@ namespace Services
 
           var processIds = workerViewModel.Processes.Select(p => p.Id).ToList();
           await _manager.Worker.AddWorkerAsync(worker, processIds);
+        }
+
+        public bool CanDeleteProcess(int workerId, int processId)
+        {
+            return !_manager.Worker.IsProcessInAppointment(workerId, processId);
+        }
+
+        public void DeleteWorker(int workerId)
+        {
+          if(_manager.Worker.HasAppointment(workerId))
+          {
+            throw new Exception("Cannot delete the worker because there are appointments associated with them. First, delete these appointments.");
+
+          }
+
+          _manager.Worker.DeleteWorker(workerId);
         }
     }
 }

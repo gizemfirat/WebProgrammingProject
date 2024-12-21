@@ -157,3 +157,64 @@ thead th {
   }
 }
 
+.multi-select {
+  position: relative;
+  width: 300px;
+}
+
+.multi-select .select-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.multi-select .select-box span {
+  font-size: 14px;
+  color: #333;
+}
+
+.multi-select .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--color-fourth-lightest);
+  border: 1px solid var(--color-fourth);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: none;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.multi-select .dropdown.open {
+  display: block;
+}
+
+.multi-select .dropdown label {
+  display: block;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.multi-select .dropdown label:hover {
+  background-color: #f0f0f0;
+}
+
+.multi-select .dropdown input[type="checkbox"] {
+  margin-right: 10px;
+  background-color: var(--color-tertiary);
+  border: 1px var(--color-fourth-darkest);
+}
+
+.section-admin-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+

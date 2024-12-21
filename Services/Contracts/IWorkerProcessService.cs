@@ -1,4 +1,5 @@
 using Entities.Models;
+using Entities.ViewModels;
 
 namespace Services.Contracts
 {
@@ -9,5 +10,6 @@ namespace Services.Contracts
     void AddWorkerProcess(WorkerProcess workerProcess);
     void DeleteWorkerProcess(WorkerProcess workerProcess);
     void UpdateWorkerProcess(WorkerProcess workerProcess);
+    List<ProcessDto> GetProcessesByWorkerId(int workerId);
   }
 }

@@ -13,5 +13,9 @@ namespace Repositories.Contracts
     IEnumerable<Worker> GetWorkersByProcessId(int processId);
     Task<IEnumerable<WorkerViewModel>> GetWorkersWithProcessesAsync();
     Task AddWorkerAsync(Worker worker, List<int> processIds);
+    bool IsProcessInAppointment(int workerId, int processId);
+    void UpdateWorkerProcesses(int workerId, List<int> newProcessIds);
+    bool HasAppointment(int workerId);
+    void DeleteWorker(int workerId);
   }
 }

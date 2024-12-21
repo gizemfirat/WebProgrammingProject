@@ -9,10 +9,13 @@ namespace Services.Contracts
     IEnumerable<Worker> GetWorkers(bool trackChanges);
     Worker? GetWorker(int id, bool trackChanges);
     void AddWorker(Worker worker);
-    void DeleteWorker(Worker worker);
-    void UpdateWorker(Worker worker);
+    void Delete(Worker worker);
+    void UpdateWorker(WorkerViewModel worker);
     IEnumerable<Worker> GetWorkersByProcess(int processId);
     Task<IEnumerable<WorkerViewModel>> GetAllWorkersWithProcessesAsync();
     Task AddWorkerAsync(WorkerViewModel workerViewModel);
+    bool CanDeleteProcess(int workerId, int processId);
+    void DeleteWorker(int workerId);
+
   }
 }
