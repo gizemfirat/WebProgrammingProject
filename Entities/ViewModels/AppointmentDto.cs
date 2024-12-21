@@ -1,6 +1,6 @@
 namespace Entities.ViewModels
 {
-  public class AppointmentDetailDto
+  public class AppointmentDto
   {
     public int AppointmentId { get; set; }
     public String ProcessName { get; set; }
@@ -12,5 +12,7 @@ namespace Entities.ViewModels
     public DateTime EndTime { get; set; }
     public int EstablishedTime { get; set; }
     public decimal Price { get; set; }
+    public int CustomerId { get; set; }
+    public String CustomerFullName { get; set; }
   }
 }

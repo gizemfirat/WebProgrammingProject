@@ -10,5 +10,6 @@ namespace Services.Contracts
     void DeleteCustomer(Customer customer);
     void UpdateCustomer(Customer customer);
     Task<Customer> GetCustomerByEmailAsync(String email);
+    bool DeleteCustomerWithDependenciesAsync(int customerId); 
   }
 }

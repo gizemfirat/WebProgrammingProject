@@ -23,7 +23,7 @@ namespace Repositories
       _context.SaveChanges();
     }
 
-    public void DeleteProcess(Process process)
+    public void Delete(Process process)
     {
       Delete(process);
       _context.SaveChanges();
@@ -81,6 +81,37 @@ namespace Repositories
                         }).ToList();
 
       return result;
+    }
+
+    public bool HasAppointment(int processId)
+    {
+      return (from appointment in _context.Appointments
+              join avaliableTime in _context.AvaliableTimes on appointment.AvaliableTimeId equals avaliableTime.Id
+              join workerProcess in _context.WorkerProcesses on avaliableTime.WorkerProcessId equals workerProcess.Id
+              where workerProcess.ProcessId == processId
+              select appointment).Any();
+    }
+
+    public void DeleteProcess(int processId)
+    {
+      var workerProcesses = _context.WorkerProcesses
+      .Where(wp => wp.ProcessId == processId).ToList();
+
+      foreach(var workerProcess in workerProcesses) {
+        var avaliableTimes = _context.AvaliableTimes
+        .Where(at => at.WorkerProcessId == workerProcess.Id).ToList();
+
+        _context.AvaliableTimes.RemoveRange(avaliableTimes);
+      }
+
+      _context.WorkerProcesses.RemoveRange(workerProcesses);
+
+      var process = _context.Processes.Find(processId);
+      if(process != null) {
+        _context.Processes.Remove(process);
+      }
+
+      _context.SaveChanges();
     }
   }
 }

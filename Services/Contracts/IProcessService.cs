@@ -13,5 +13,7 @@ namespace Services.Contracts
     IEnumerable<Process> GetProcessesByProfession(int professionId);
     IEnumerable<ProcessGroupDto> GetGroupedProcesses();
     IEnumerable<ProcessWithProfessionViewModel> GetProcessesWithProfession();
+    bool CheckIfProcessHasAppointments(int processId);
+    void RemoveProcess(int processId);
   }
 }

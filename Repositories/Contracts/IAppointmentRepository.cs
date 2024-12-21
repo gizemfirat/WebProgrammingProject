@@ -15,5 +15,7 @@ namespace Repositories.Contracts
     void Create(Appointment appointment);
     bool SaveAppointment(int avaliableTimeId, int customerId);
     List<AppointmentDetailDto> GetAppointmentsByCustomer(int customerId);
+    List<Appointment> GetAppointmentsByCustomerId(int customerId);
+    IEnumerable<AppointmentDto> GetAppointmentDetails();
   }
 }

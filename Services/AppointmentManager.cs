@@ -33,7 +33,7 @@ namespace Services
       _manager.Appointment.AddAppointment(appointment);
     }
 
-    public void DeleteAppointment(int appointmentId)
+    public void Delete(int appointmentId)
     {
       var appointment = _manager.Appointment.GetAppointment(appointmentId, false);
       if (appointment != null)
@@ -70,5 +70,27 @@ namespace Services
     {
       return _manager.Appointment.GetAppointmentsByCustomer(customerId);
     }
-  }
+
+    public List<Appointment> GetAppointmentsByCustomerId(int customerId)
+    {
+      return _manager.Appointment.GetAppointmentsByCustomerId(customerId);
+    }
+
+        public IEnumerable<AppointmentDto> GetAppointmentDetails()
+        {
+            return _manager.Appointment.GetAppointmentDetails();
+        }
+
+        public void DeleteAppointment(int appointmentId)
+        {
+          var appointment = _manager.Appointment.GetAppointment(appointmentId, false);
+          var avaliableTime = _manager.AvaliableTime.GetAvaliableTime(appointment.AvaliableTimeId, false);
+
+          if(appointment == null) { //TODO buradan devam et.
+          }
+          _manager.Appointment.DeleteAppointment(appointment);
+          avaliableTime.IsAvaliable = 1;
+          _manager.AvaliableTime.UpdateAvaliableTime(avaliableTime);
+        }
+    }
 }

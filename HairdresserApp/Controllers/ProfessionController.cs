@@ -12,6 +12,18 @@ namespace HairdresserApp.Controllers
     public ProfessionController(IServiceManager manager) {
       _manager = manager;
     }
+
+    [HttpGet("GetProfessions")]
+    public IActionResult GetProfessions() {
+      var professions = _manager.ProfessionService.GetProfessions(false)
+      .Select(p => new 
+      {
+        Id = p.Id,
+        Name = p.Name
+      }).ToList();
+
+      return Json(professions);
+    }
     public IActionResult Index() {
       return View();
     }

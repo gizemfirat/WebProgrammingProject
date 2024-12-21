@@ -1,6 +1,7 @@
 using Services.Contracts;
 using Entities.Models;
 using Repositories.Contracts;
+using System.Reflection.Metadata;
 
 namespace Services
 {
@@ -44,6 +45,28 @@ namespace Services
         public async Task<Customer> GetCustomerByEmailAsync(string email)
         {
             return await _manager.Customer.GetCustomerByEmailAsync(email);
+        }
+
+        public bool DeleteCustomerWithDependenciesAsync(int customerId)
+        {
+          var customer = _manager.Customer.GetCustomer(customerId, false);
+          if(customer == null) {
+            return false;
+          }
+
+          var appointments = _manager.Appointment.GetAppointmentsByCustomerId(customerId);
+          foreach(var appointment in appointments) {
+            var avaliableTime = _manager.AvaliableTime.GetAvaliableTime(appointment.AvaliableTimeId, false);
+            if(avaliableTime != null) {
+              avaliableTime.IsAvaliable = 1;
+              _manager.AvaliableTime.UpdateAvaliableTime(avaliableTime);
+            }
+
+            _manager.Appointment.DeleteAppointment(appointment);
+          }
+
+          _manager.Customer.DeleteCustomer(customer);
+          return true;
         }
     }
 }

@@ -218,3 +218,50 @@ thead th {
   align-items: center;
 }
 
+.no-transform {
+  text-transform: none;
+}
+
+/* Dropdown container styling */
+.single-select {
+  position: relative;
+  width: 300px;
+  cursor: pointer;
+}
+
+/* Selected item styling */
+.single-select-box {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Dropdown options styling */
+.single-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: none;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.single-dropdown div {
+  padding: 10px;
+  border-bottom: 1px solid #f4f4f4;
+  cursor: pointer;
+}
+
+.single-dropdown div:hover {
+  background-color: #e9e9e9;
+}
+
+.single-dropdown div:last-child {
+  border-bottom: none;
+}

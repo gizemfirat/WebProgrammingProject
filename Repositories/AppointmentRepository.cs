@@ -89,12 +89,47 @@ namespace Repositories
                             AppointmentId = a.Id,
                             ProcessName = p.Name,
                             WorkerFullName = w.Name + " " + w.Surname,
+                            WorkerProcessId = wp.Id,
+                            AvaliableTimeId = at.Id,
+                            IsAvaliable = at.IsAvaliable,
                             Date = at.Time,
+                            EndTime = at.EndTime,
                             EstablishedTime = p.Time,
                             Price = p.Price
                           }).ToList();
 
       return appointments;
     }
-  }
+
+        public List<Appointment> GetAppointmentsByCustomerId(int customerId)
+        {
+          return _context.Appointments.Where(a => a.CustomerId == customerId).ToList();
+        }
+
+        public IEnumerable<AppointmentDto> GetAppointmentDetails()
+        {
+ var appointmentDetails = from appointment in _context.Appointments
+                             join time in _context.AvaliableTimes on appointment.AvaliableTimeId equals time.Id
+                             join workerProcess in _context.WorkerProcesses on time.WorkerProcessId equals workerProcess.Id
+                             join worker in _context.Workers on workerProcess.WorkerId equals worker.Id
+                             join process in _context.Processes on workerProcess.ProcessId equals process.Id
+                             join customer in _context.Customers on appointment.CustomerId equals customer.Id
+                             select new AppointmentDto
+                             {
+                                 AppointmentId = appointment.Id,
+                                 ProcessName = process.Name,
+                                 WorkerFullName = $"{worker.Name} {worker.Surname}",
+                                 WorkerProcessId = workerProcess.Id,
+                                 AvaliableTimeId = time.Id,
+                                 IsAvaliable = time.IsAvaliable,
+                                 Date = time.Time,
+                                 EndTime = time.EndTime,
+                                 EstablishedTime = process.Time,
+                                 Price = process.Price,
+                                 CustomerFullName = $"{customer.Name} {customer.Surname}"
+                             };
+
+    return appointmentDetails.ToList();
+        }
+    }
 }

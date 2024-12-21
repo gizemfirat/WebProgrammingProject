@@ -35,7 +35,7 @@ namespace Services
 
     public void DeleteProcess(Process process)
     {
-      _manager.Process.DeleteProcess(process);
+      _manager.Process.Delete(process);
     }
 
     public void UpdateProcess(Process process)
@@ -56,5 +56,15 @@ namespace Services
     {
       return _manager.Process.GetProcessesWithProfession();
     }
-  }
+
+        public bool CheckIfProcessHasAppointments(int processId)
+        {
+            return _manager.Process.HasAppointment(processId);
+        }
+
+        public void RemoveProcess(int processId)
+        {
+            _manager.Process.DeleteProcess(processId);
+        }
+    }
 }
