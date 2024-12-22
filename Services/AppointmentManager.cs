@@ -81,16 +81,18 @@ namespace Services
             return _manager.Appointment.GetAppointmentDetails();
         }
 
-        public void DeleteAppointment(int appointmentId)
+        public bool DeleteAppointment(int appointmentId)
         {
           var appointment = _manager.Appointment.GetAppointment(appointmentId, false);
           var avaliableTime = _manager.AvaliableTime.GetAvaliableTime(appointment.AvaliableTimeId, false);
 
-          if(appointment == null) { //TODO buradan devam et.
+          if(appointment == null) {
+            return false;
           }
           _manager.Appointment.DeleteAppointment(appointment);
           avaliableTime.IsAvaliable = 1;
           _manager.AvaliableTime.UpdateAvaliableTime(avaliableTime);
+          return true;
         }
     }
 }

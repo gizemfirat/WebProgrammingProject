@@ -65,7 +65,8 @@ namespace Repositories
       var appointment = new Appointment
       {
         AvaliableTimeId = avaliableTimeId,
-        CustomerId = customerId
+        CustomerId = customerId,
+        IsApproved = 0
       };
 
       _context.Appointments.Add(appointment);
@@ -95,7 +96,8 @@ namespace Repositories
                             Date = at.Time,
                             EndTime = at.EndTime,
                             EstablishedTime = p.Time,
-                            Price = p.Price
+                            Price = p.Price,
+                            IsApproved = a.IsApproved
                           }).ToList();
 
       return appointments;

@@ -10,6 +10,7 @@
             <th>Date</th>
             <th>Time</th>
             <th>Price</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +22,11 @@
                 <td>@appointment.Date.ToString("yyyy-MM-dd HH:mm")</td>
                 <td>@appointment.EstablishedTime minutes</td>
                 <td>@appointment.Price ₺</td>
+                @if(appointment.IsApproved == 0) {
+                <td>Waiting for an approval...</td>
+                } else {
+                  <td>Approved!</td>
+                }
             </tr>
         }
     </tbody>

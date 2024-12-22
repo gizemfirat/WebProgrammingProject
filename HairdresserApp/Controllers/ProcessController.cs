@@ -5,7 +5,7 @@ using Services.Contracts;
 
 namespace HairdresserApp.Controllers
 {
-  [Route("Process")]
+  
     public class ProcessController : Controller
   {
 

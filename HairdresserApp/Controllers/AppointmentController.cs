@@ -59,7 +59,11 @@ namespace HairdresserApp.Controllers
     [HttpDelete("/Appointment/DeleteAppointment/{appointmentId}")]
     public IActionResult DeleteAppointment(int appointmentId) {
       var result = _manager.AppointmentService.DeleteAppointment(appointmentId);
-      if()
+      if(!result) {
+        return BadRequest(new {message = "Error!"});
+      }
+
+      return Ok(new {message = "Appointment deleted successfully!"});
     }
 
   }

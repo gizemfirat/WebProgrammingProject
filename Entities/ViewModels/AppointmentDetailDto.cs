@@ -12,5 +12,6 @@ namespace Entities.ViewModels
     public DateTime EndTime { get; set; }
     public int EstablishedTime { get; set; }
     public decimal Price { get; set; }
+    public int IsApproved { get; set; }
   }
 }

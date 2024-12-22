@@ -5,5 +5,6 @@ namespace Entities.Models
     public int Id { get; set; }
     public int CustomerId { get; set; }
     public int AvaliableTimeId { get; set; }
+    public int IsApproved { get; set; } = 0;
   }
 }
