@@ -37,7 +37,8 @@ namespace HairdresserApp.Controllers
 
     public IActionResult GetAvaliableTimes()
     {
-      return View();
+      var avaliableTimes = _manager.AvaliableTimeService.GetAvaliableTimeDetails();
+      return View(avaliableTimes);
     }
 
     public IActionResult GetAppointments()

@@ -1,3 +1,4 @@
+using System.Net;
 using Entities.Models;
 using Entities.ViewModels;
 using Repositories.Contracts;
@@ -38,15 +39,30 @@ namespace Repositories
     public List<ProcessDto> GetProcessesByWorkerId(int workerId)
     {
       var processes = (from wp in _context.WorkerProcesses
-                      join p in _context.Processes on wp.ProcessId equals p.Id
-                      where wp.WorkerId == workerId
-                      select new ProcessDto
-                      {
-                        Id = p.Id,
-                        Name = p.Name
-                      }).ToList();
+                       join p in _context.Processes on wp.ProcessId equals p.Id
+                       where wp.WorkerId == workerId
+                       select new ProcessDto
+                       {
+                         Id = p.Id,
+                         Name = p.Name
+                       }).ToList();
 
       return processes;
+    }
+
+    public List<WorkerProcessViewModel> GetWorkerProcesses()
+    {
+      var result = (from wp in _context.WorkerProcesses
+                    join w in _context.Workers on wp.WorkerId equals w.Id
+                    join p in _context.Processes on wp.ProcessId equals p.Id
+                    select new WorkerProcessViewModel
+                    {
+                      WorkerProcessId = wp.Id,
+                      WorkerProcessFullName = $"{w.Name} {w.Surname} - {p.Name}",
+                    }).ToList();
+
+      return result;
+
     }
   }
 }

@@ -46,5 +46,10 @@ namespace Services
         {
           return _manager.WorkerProcess.GetProcessesByWorkerId(workerId);
         }
+
+        public List<WorkerProcessViewModel> GetWorkerProcessesDetail()
+        {
+          return _manager.WorkerProcess.GetWorkerProcesses();
+        }
     }
 }

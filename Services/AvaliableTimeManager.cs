@@ -52,5 +52,10 @@ namespace Services
     {
       return _manager.AvaliableTime.GetAvaliableTimesForProcess(processId);
     }
+
+    public List<AvaliableTimeViewModel> GetAvaliableTimeDetails()
+    {
+      return _manager.AvaliableTime.GetAvaliableTimeDetails();
+    }
   }
 }

@@ -41,7 +41,6 @@ namespace HairdresserApp.Controllers
       existingCustomer.Surname = request.Surname;
       existingCustomer.Email = request.Email;
       existingCustomer.Password = request.Password;
-      existingCustomer.Role = request.Role;
 
       _manager.CustomerService.UpdateCustomer(existingCustomer);
       return Ok("Customer updated successfully!");

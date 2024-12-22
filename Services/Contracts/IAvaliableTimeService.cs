@@ -12,5 +12,6 @@ namespace Services.Contracts
     void UpdateAvaliableTime(AvaliableTime avaliableTime);
     IEnumerable<AvaliableTimeDto> GetAvaliableiTimesByWorker(int workerId);
     List<ProcessDetailViewModel> GetAvaliableTimesByProcess(int processId);
+    List<AvaliableTimeViewModel> GetAvaliableTimeDetails();
   }
 }

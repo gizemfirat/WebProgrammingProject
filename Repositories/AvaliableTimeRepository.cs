@@ -84,5 +84,28 @@ namespace Repositories
 
       return result;
     }
+
+    public List<AvaliableTimeViewModel> GetAvaliableTimeDetails()
+    {
+      var result = (from avaliableTime in _context.AvaliableTimes
+                    join workerProcess in _context.WorkerProcesses on avaliableTime.WorkerProcessId equals workerProcess.Id
+                    join process in _context.Processes on workerProcess.ProcessId equals process.Id
+                    join worker in _context.Workers on workerProcess.WorkerId equals worker.Id
+                    select new AvaliableTimeViewModel
+                    {
+                      AvaliableTimeId = avaliableTime.Id,
+                      WorkerProcessId = workerProcess.Id,
+                      WorkerName = worker.Name,
+                      WorkerSurname = worker.Surname,
+                      WorkerId = worker.Id,
+                      ProcessId = process.Id,
+                      ProcessName = process.Name,
+                      Time = avaliableTime.Time,
+                      EndTime = avaliableTime.EndTime,
+                      IsAvaliable = avaliableTime.IsAvaliable
+                    }).ToList();
+
+      return result;
+    }
   }
 }

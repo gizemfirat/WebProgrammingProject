@@ -1,8 +1,7 @@
-namespace Entities.Models
+namespace Entities.ViewModels
 {
-  public class Customer
+  public class RegisterViewModel
   {
-    public int Id { get; set; }
     public String Name { get; set; }
     public String Surname { get; set; }
     public String Email { get; set; }

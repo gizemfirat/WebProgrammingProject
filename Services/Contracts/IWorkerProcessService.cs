@@ -11,5 +11,6 @@ namespace Services.Contracts
     void DeleteWorkerProcess(WorkerProcess workerProcess);
     void UpdateWorkerProcess(WorkerProcess workerProcess);
     List<ProcessDto> GetProcessesByWorkerId(int workerId);
+    List<WorkerProcessViewModel> GetWorkerProcessesDetail();
   }
 }

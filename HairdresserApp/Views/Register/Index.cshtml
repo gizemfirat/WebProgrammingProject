@@ -1,22 +1,24 @@
+@model Entities.ViewModels.RegisterViewModel
+
 <div class="section-register">
   <div class="register-content u-margin-top-5">
-    <form asp-action="register" method="post" class="register-form">
+    <form asp-action="Register" asp-controller="Register" method="post" class="register-form">
       <img src="/img/picpeople.png" alt="register-logo" class="register-logo" />
       <div class="register-form-group">
         <label class="register-form-label"> First Name </label>
-        <input class="register-form-input" type="text" />
+        <input class="register-form-input" id="Name" type="text" asp-for="Name" />
       </div>
       <div class="register-form-group">
-        <label class="register-form-label"> Last Name </label>
-        <input class="register-form-input" type="text" />
+        <label class="register-form-label"> Surname </label>
+        <input class="register-form-input" type="text" id="Surname" asp-for="Surname" />
       </div>
       <div class="register-form-group">
-        <label class="register-form-label"> Username </label>
-        <input class="register-form-input" type="text" />
+        <label class="register-form-label"> Email </label>
+        <input class="register-form-input" type="text" id="Email" asp-for="Email" />
       </div>
       <div class="register-form-group">
         <label class="register-form-label"> Password </label>
-        <input class="register-form-input" type="password" />
+        <input class="register-form-input" type="password" id="Password" asp-for="Password" />
       </div>
       <div class="register-form-group">
         <button type="submit" class="btn btn-primary">Sign Up</button>

@@ -14,5 +14,6 @@ namespace Repositories.Contracts
     Task UpdateAsync(AvaliableTime avaliableTime);
      IEnumerable<AvaliableTimeDto> GetAvaliableTimesByWorkerId(int workerId);
     List<ProcessDetailViewModel> GetAvaliableTimesForProcess(int processId);
+    List<AvaliableTimeViewModel> GetAvaliableTimeDetails();
   }
 }
