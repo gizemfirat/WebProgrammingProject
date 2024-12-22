@@ -39,8 +39,15 @@ namespace HairdresserApp.Controllers
         var customer = await _manager.CustomerService.GetCustomerByEmailAsync(model.Email);
         if (customer == null)
         {
-          ModelState.AddModelError(string.Empty, "Unvalid Login Attempt.");
-          return View(model);
+          var worker = await _manager.WorkerService.GetWorkerByEmailAsync(model.Email);
+          if (worker == null)
+          {
+            ModelState.AddModelError(string.Empty, "Unvalid Login Attempt.");
+            return View(model);
+          }
+
+          HttpContext.Session.SetInt32("workerId", worker.Id);
+          return RedirectToAction("Index", "Home");
         }
 
         HttpContext.Session.SetInt32("customerId", customer.Id);

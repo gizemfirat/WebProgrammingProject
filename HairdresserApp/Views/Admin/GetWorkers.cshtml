@@ -28,8 +28,8 @@
         <td>@worker.Salary ₺</td>
         <td>
           <button class="btn btn-primary edit-button" data-id="@worker.Id" data-name="@worker.Name"
-            data-surname="@worker.Surname" data-salary="@worker.Salary"
-            data-processes='@Html.Raw(Json.Serialize(worker.Processes))'>Edit</button>
+            data-surname="@worker.Surname" data-salary="@worker.Salary" data-email="@worker.Email"
+            data-password="@worker.Password" data-processes='@Html.Raw(Json.Serialize(worker.Processes))'>Edit</button>
           <button class="btn btn-outlined delete-button" data-id="@worker.Id">Delete</button>
         </td>
       </tr>
@@ -55,6 +55,14 @@
         <div class="form-group">
           <label for="Surname" class="form-label">Surname</label>
           <input type="text" id="Surname" name="Surname" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label for="Email" class="form-label">Email</label>
+          <input type="text" id="Email" name="Email" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label for="Password" class="form-label">Password</label>
+          <input type="text" id="Password" name="Password" class="form-input" required />
         </div>
         <div class="form-group">
           <label for="Salary" class="form-label">Salary</label>
@@ -133,11 +141,15 @@
       console.log(id);
       const name = button.getAttribute('data-name');
       const surname = button.getAttribute('data-surname');
+      const email = button.getAttribute('data-email');
+      const password = button.getAttribute('data-password');
       const salary = button.getAttribute('data-salary');
       const processes = JSON.parse(button.getAttribute('data-processes'));
 
       document.getElementById('Name').value = name;
       document.getElementById('Surname').value = surname;
+      document.getElementById('Email').value = email;
+      document.getElementById('Password').value = password;
       document.getElementById('Salary').value = salary;
       document.getElementById('Id').value = id;
 
@@ -172,6 +184,8 @@
     const workerData = {
       Name: formData.get('Name'),
       Surname: formData.get('Surname'),
+      Email: formData.get('Email'),
+      Password: formData.get('Password'),
       Salary: formData.get('Salary'),
       Processes: selectedProcesses
     };
@@ -184,8 +198,6 @@
     const url = id ? `/Worker/Update` : '/Worker/Create';
     const method = id ? 'PUT' : 'POST';
     console.log(workerData);
-
-
 
     fetch(url, {
       method: method,
@@ -214,23 +226,23 @@
 <script>
   document.querySelectorAll('.delete-button').forEach(button => {
     button.addEventListener('click', () => {
-        const workerId = button.getAttribute('data-id');
-        
-        if (confirm('Are you sure you want to delete this worker?')) {
-            fetch(`/Worker/Delete/${workerId}`, {
-                method: 'DELETE'
-            })
-            .then(response => response.json())
-            .then(data => {
-                 console.log(data);
-                alert(data.message);
-                location.reload();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error occurred while deleting the worker.');
-            });
-        }
+      const workerId = button.getAttribute('data-id');
+
+      if (confirm('Are you sure you want to delete this worker?')) {
+        fetch(`/Worker/Delete/${workerId}`, {
+          method: 'DELETE'
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            alert(data.message);
+            location.reload();
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Error occurred while deleting the worker.');
+          });
+      }
     });
-});
+  });
 </script>

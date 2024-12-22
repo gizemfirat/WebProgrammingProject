@@ -16,6 +16,7 @@ namespace Services.Contracts
     Task AddWorkerAsync(WorkerViewModel workerViewModel);
     bool CanDeleteProcess(int workerId, int processId);
     void DeleteWorker(int workerId);
+    Task<Worker> GetWorkerByEmailAsync(String email);
 
   }
 }

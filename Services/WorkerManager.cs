@@ -48,6 +48,8 @@ namespace Services
 
       worker.Name = workerViewModel.Name;
       worker.Surname = workerViewModel.Surname;
+      worker.Email = workerViewModel.Email;
+      worker.Password = workerViewModel.Password;
       worker.Salary = workerViewModel.Salary;
 
       var processIds = workerViewModel.Processes.Select(p => p.Id).ToList();
@@ -72,6 +74,8 @@ namespace Services
           {
             Name = workerViewModel.Name,
             Surname = workerViewModel.Surname,
+            Email = workerViewModel.Email,
+            Password = workerViewModel.Password,
             Salary = workerViewModel.Salary
           };
 
@@ -93,6 +97,11 @@ namespace Services
           }
 
           _manager.Worker.DeleteWorker(workerId);
+        }
+
+        public async Task<Worker> GetWorkerByEmailAsync(string email)
+        {
+            return await _manager.Worker.GetWorkerByEmailAsync(email);
         }
     }
 }

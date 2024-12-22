@@ -53,6 +53,8 @@ namespace Repositories
                       Id = worker.Id,
                       Name = worker.Name,
                       Surname = worker.Surname,
+                      Email = worker.Email,
+                      Password = worker.Password,
                       Salary = worker.Salary,
                       Processes = _context.WorkerProcesses
                                   .Where(wp => wp.WorkerId == worker.Id)
@@ -102,59 +104,68 @@ namespace Repositories
       return query.Any();
     }
 
-        public void UpdateWorkerProcesses(int workerId, List<int> newProcessIds)
-        {
-          var currentProcesses = _context.WorkerProcesses
-                                         .Where(wp => wp.WorkerId == workerId)
-                                         .ToList();
+    public void UpdateWorkerProcesses(int workerId, List<int> newProcessIds)
+    {
+      var currentProcesses = _context.WorkerProcesses
+                                     .Where(wp => wp.WorkerId == workerId)
+                                     .ToList();
 
-          var processesToDelete = currentProcesses.Where(wp => !newProcessIds.Contains(wp.ProcessId)).ToList();
-          _context.WorkerProcesses.RemoveRange(processesToDelete);
+      var processesToDelete = currentProcesses.Where(wp => !newProcessIds.Contains(wp.ProcessId)).ToList();
+      _context.WorkerProcesses.RemoveRange(processesToDelete);
 
-          var processesToAdd = newProcessIds.Where(id => !currentProcesses.Any(wp => wp.ProcessId == id))
-                                            .Select(id => new WorkerProcess {WorkerId = workerId, ProcessId = id})
-                                            .ToList();
-          
-          _context.WorkerProcesses.AddRange(processesToAdd);
-          _context.SaveChanges();
-        }
-
-        public bool HasAppointment(int workerId)
-        {
-          var workerProcessIds = _context.WorkerProcesses
-                                         .Where(wp => wp.WorkerId == workerId)
-                                         .Select(wp => wp.Id)
-                                         .ToList();
-                                    
-          var avaliableTimeIds = _context.AvaliableTimes
-                                         .Where(at => workerProcessIds.Contains(at.WorkerProcessId))
-                                         .Select(at => at.Id)
-                                         .ToList();
-
-          return _context.Appointments
-                         .Any(a => avaliableTimeIds.Contains(a.AvaliableTimeId));
-        }
-
-        public void DeleteWorker(int workerId)
-        {
-          var workerProcesses = _context.WorkerProcesses
-                                        .Where(wp => wp.WorkerId == workerId)
+      var processesToAdd = newProcessIds.Where(id => !currentProcesses.Any(wp => wp.ProcessId == id))
+                                        .Select(id => new WorkerProcess { WorkerId = workerId, ProcessId = id })
                                         .ToList();
 
-          _context.WorkerProcesses.RemoveRange(workerProcesses);
-
-          var avaliableTimes = _context.AvaliableTimes
-                                       .Where(at => workerProcesses.Select(wp => wp.Id).Contains(at.WorkerProcessId))
-                                       .ToList();
-
-          _context.AvaliableTimes.RemoveRange(avaliableTimes);
-
-          var worker = _context.Workers.FirstOrDefault(w => w.Id == workerId);
-          if(worker != null) {
-            _context.Workers.Remove(worker);
-          }
-
-          _context.SaveChanges();
-        }
+      _context.WorkerProcesses.AddRange(processesToAdd);
+      _context.SaveChanges();
     }
+
+    public bool HasAppointment(int workerId)
+    {
+      var workerProcessIds = _context.WorkerProcesses
+                                     .Where(wp => wp.WorkerId == workerId)
+                                     .Select(wp => wp.Id)
+                                     .ToList();
+
+      var avaliableTimeIds = _context.AvaliableTimes
+                                     .Where(at => workerProcessIds.Contains(at.WorkerProcessId))
+                                     .Select(at => at.Id)
+                                     .ToList();
+
+      return _context.Appointments
+                     .Any(a => avaliableTimeIds.Contains(a.AvaliableTimeId));
+    }
+
+    public void DeleteWorker(int workerId)
+    {
+      var workerProcesses = _context.WorkerProcesses
+                                    .Where(wp => wp.WorkerId == workerId)
+                                    .ToList();
+
+      _context.WorkerProcesses.RemoveRange(workerProcesses);
+
+      var avaliableTimes = _context.AvaliableTimes
+                                   .Where(at => workerProcesses.Select(wp => wp.Id).Contains(at.WorkerProcessId))
+                                   .ToList();
+
+      _context.AvaliableTimes.RemoveRange(avaliableTimes);
+
+      var worker = _context.Workers.FirstOrDefault(w => w.Id == workerId);
+      if (worker != null)
+      {
+        _context.Workers.Remove(worker);
+      }
+
+      _context.SaveChanges();
+    }
+
+    public async Task<Worker> GetWorkerByEmailAsync(string email)
+    {
+      return await _context.Workers
+      .Where(c => c.Email == email)
+      .FirstOrDefaultAsync();
+    }
+
+  }
 }

@@ -17,5 +17,6 @@ namespace Repositories.Contracts
     void UpdateWorkerProcesses(int workerId, List<int> newProcessIds);
     bool HasAppointment(int workerId);
     void DeleteWorker(int workerId);
+    Task<Worker> GetWorkerByEmailAsync(string email);
   }
 }

@@ -50,6 +50,12 @@
                 <a asp-controller="Appointment" asp-action="MyAppointments" class="header-link">My Appointments</a>
             </div>
         }
+         @if (Context.Session.GetInt32("workerId") is not null)
+        {
+            <div class="header-item">
+                <a asp-controller="Appointment" asp-action="Appointments" class="header-link">Appointments</a>
+            </div>
+        }
         @if (User.IsInRole("Admin"))
         {
             <div class="header-item">
@@ -71,7 +77,7 @@
         </div>
         <div class="header-login-item">
             <img src="/img/circle-user.png" alt="menu-item-3" class="header-login-logo" />
-            @if (User.Identity.IsAuthenticated || Context.Session.GetInt32("customerId") is not null)
+            @if (User.Identity.IsAuthenticated || Context.Session.GetInt32("customerId") is not null || Context.Session.GetInt32("workerId") is not null)
             {
                 <form asp-controller="Account" asp-action="Logout" method="post">
                     <button type="submit" class="btn btn-link">Logout</button>
