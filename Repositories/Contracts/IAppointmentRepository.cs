@@ -17,5 +17,6 @@ namespace Repositories.Contracts
     List<AppointmentDetailDto> GetAppointmentsByCustomer(int customerId);
     List<Appointment> GetAppointmentsByCustomerId(int customerId);
     IEnumerable<AppointmentDto> GetAppointmentDetails();
+    List<AppointmentForWorkerDto> GetAppointmentForWorker(int workerId); 
   }
 }

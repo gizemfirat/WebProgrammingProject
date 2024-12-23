@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using Entities.Models;
 using Entities.ViewModels;
 
@@ -15,5 +16,8 @@ namespace Services.Contracts
     List<Appointment> GetAppointmentsByCustomerId(int customerId);
     IEnumerable<AppointmentDto> GetAppointmentDetails();
     bool DeleteAppointment(int appointmentId);
+    List<AppointmentForWorkerDto> GetAppointmentForWorkers(int workerId);
+    void ApproveAppointment(int appointmentId);
+    void RejectAppointment(int appointmentId);
   }
 }

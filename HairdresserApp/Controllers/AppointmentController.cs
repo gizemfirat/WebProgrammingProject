@@ -23,8 +23,10 @@ namespace HairdresserApp.Controllers
     }
 
     [HttpGet("MyAppointments")]
-    public IActionResult MyAppointments() {
-      if(HttpContext.Session.GetInt32("customerId") is null) {
+    public IActionResult MyAppointments()
+    {
+      if (HttpContext.Session.GetInt32("customerId") is null)
+      {
         return RedirectToAction("Login", "Login");
       }
 
@@ -35,35 +37,67 @@ namespace HairdresserApp.Controllers
     }
 
     [HttpPost("BookAppointment")]
-    public IActionResult BookAppointment([FromBody] AppointmentRequest request) {
+    public IActionResult BookAppointment([FromBody] AppointmentRequest request)
+    {
       var customerId = HttpContext.Session.GetInt32("customerId");
 
-      if(customerId == null) {
+      if (customerId == null)
+      {
         return Unauthorized();
       }
 
       var success = _manager.AppointmentService.SaveAppointment(request.AvaliableTimeId, (int)customerId);
 
-      if(!success) {
+      if (!success)
+      {
         return BadRequest("Appointment could not be created.");
       }
 
       return Ok("Appointment successfully created.");
     }
 
-      public IActionResult Deneme(int processId) {
+    public IActionResult Deneme(int processId)
+    {
       var avaliableTimes = _manager.AvaliableTimeService.GetAvaliableTimesByProcess(processId);
       return View(avaliableTimes);
     }
 
     [HttpDelete("/Appointment/DeleteAppointment/{appointmentId}")]
-    public IActionResult DeleteAppointment(int appointmentId) {
+    public IActionResult DeleteAppointment(int appointmentId)
+    {
       var result = _manager.AppointmentService.DeleteAppointment(appointmentId);
-      if(!result) {
-        return BadRequest(new {message = "Error!"});
+      if (!result)
+      {
+        return BadRequest(new { message = "Error!" });
       }
 
-      return Ok(new {message = "Appointment deleted successfully!"});
+      return Ok(new { message = "Appointment deleted successfully!" });
+    }
+
+    [Route("AssignedAppointments")]
+    public IActionResult AssignedAppointments()
+    {
+
+      if (HttpContext.Session.GetInt32("workerId") is null)
+      {
+        return RedirectToAction("Login", "Account");
+      }
+      int workerId = (int)HttpContext.Session.GetInt32("workerId");
+      var appointments = _manager.AppointmentService.GetAppointmentForWorkers(workerId);
+
+      return View(appointments);
+    }
+
+    [HttpPost("/Appointment/Approve/{selectedAppointmentId}")]
+    public IActionResult Approve(int selectedAppointmentId) {
+      _manager.AppointmentService.ApproveAppointment(selectedAppointmentId);
+      return Ok();
+    }
+
+    [HttpPost("/Appointment/Reject/{selectedAppointmentId}")]
+    public IActionResult Reject(int selectedAppointmentId) {
+      _manager.AppointmentService.RejectAppointment(selectedAppointmentId);
+      return Ok();
     }
 
   }

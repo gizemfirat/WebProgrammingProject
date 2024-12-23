@@ -1,0 +1,117 @@
+@model List<Entities.ViewModels.AppointmentForWorkerDto>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Process</th>
+      <th>Customer</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Approval Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var appointment in Model)
+    {
+      <tr>
+        <td>@appointment.ProcessName</td>
+        <td>@appointment.CustomerFullName</td>
+        <td>@appointment.Time</td>
+        <td>@appointment.EndTime</td>
+        @if(appointment.IsApproved == 0) {
+          <td>Not Approved</td>
+          <td>
+            <button class="btn btn-primary open-modal-button" data-id="@appointment.AppointmentId" data-action="approve">Approve</button>
+      <button class="btn btn-outlined open-modal-button" data-id="@appointment.AppointmentId" data-action="reject">Reject</button>
+          </td>
+        } else {
+          <td>Approved</td>
+          <td></td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>
+
+<div id="actionModal" class="modal" data-id="">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 id="modalTitle">Action Confirmation</h5>
+      <span class="close-button" id="closeModalButton">&times;</span>
+    </div>
+    <div class="modal-body">
+      <p id="modalMessage">Are you sure you want to proceed?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" id="cancelButton" class="btn btn-outlined">Cancel</button>
+      <button type="button" id="confirmButton" class="btn btn-primary">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script>
+ const modal = document.getElementById('actionModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalMessage = document.getElementById('modalMessage');
+const confirmButton = document.getElementById('confirmButton');
+const closeModalButton = document.getElementById('closeModalButton');
+const cancelButton = document.getElementById('cancelButton');
+let selectedAppointmentId = null;
+let selectedAction = null;
+
+
+document.querySelectorAll('.open-modal-button').forEach(button => {
+  button.addEventListener('click', function () {
+    selectedAppointmentId = this.getAttribute('data-id');
+    console.log(selectedAppointmentId);
+    selectedAction = this.getAttribute('data-action');
+    console.log(selectedAction);
+
+    if (selectedAction === 'approve') {
+      modalTitle.textContent = 'Approve Appointment';
+      modalMessage.textContent = 'Are you sure you want to approve this appointment?';
+      confirmButton.className = 'btn btn-primary';
+    } else if (selectedAction === 'reject') {
+      modalTitle.textContent = 'Reject Appointment';
+      modalMessage.textContent = 'Are you sure you want to reject this appointment?';
+      confirmButton.className = 'btn btn-primary';
+    }
+
+    modal.style.display = 'block';
+  });
+});
+
+
+closeModalButton.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+cancelButton.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+window.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+
+confirmButton.addEventListener('click', () => {
+  const url = selectedAction === 'approve'
+    ? `/Appointment/Approve/${selectedAppointmentId}`
+    : `/Appointment/Reject/${selectedAppointmentId}`;
+
+  fetch(url, { method: 'POST' })
+    .then(response => {
+      if (response.ok) {
+        alert('Action completed successfully!');
+        location.reload();
+      } else {
+        alert('An error occurred while processing your request.');
+      }
+    })
+    .catch(error => console.error('Error:', error));
+
+  modal.style.display = 'none';
+});
+</script>

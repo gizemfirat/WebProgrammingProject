@@ -103,21 +103,21 @@ namespace Repositories
       return appointments;
     }
 
-        public List<Appointment> GetAppointmentsByCustomerId(int customerId)
-        {
-          return _context.Appointments.Where(a => a.CustomerId == customerId).ToList();
-        }
+    public List<Appointment> GetAppointmentsByCustomerId(int customerId)
+    {
+      return _context.Appointments.Where(a => a.CustomerId == customerId).ToList();
+    }
 
-        public IEnumerable<AppointmentDto> GetAppointmentDetails()
-        {
- var appointmentDetails = from appointment in _context.Appointments
-                             join time in _context.AvaliableTimes on appointment.AvaliableTimeId equals time.Id
-                             join workerProcess in _context.WorkerProcesses on time.WorkerProcessId equals workerProcess.Id
-                             join worker in _context.Workers on workerProcess.WorkerId equals worker.Id
-                             join process in _context.Processes on workerProcess.ProcessId equals process.Id
-                             join customer in _context.Customers on appointment.CustomerId equals customer.Id
-                             select new AppointmentDto
-                             {
+    public IEnumerable<AppointmentDto> GetAppointmentDetails()
+    {
+      var appointmentDetails = from appointment in _context.Appointments
+                               join time in _context.AvaliableTimes on appointment.AvaliableTimeId equals time.Id
+                               join workerProcess in _context.WorkerProcesses on time.WorkerProcessId equals workerProcess.Id
+                               join worker in _context.Workers on workerProcess.WorkerId equals worker.Id
+                               join process in _context.Processes on workerProcess.ProcessId equals process.Id
+                               join customer in _context.Customers on appointment.CustomerId equals customer.Id
+                               select new AppointmentDto
+                               {
                                  AppointmentId = appointment.Id,
                                  ProcessName = process.Name,
                                  WorkerFullName = $"{worker.Name} {worker.Surname}",
@@ -129,9 +129,32 @@ namespace Repositories
                                  EstablishedTime = process.Time,
                                  Price = process.Price,
                                  CustomerFullName = $"{customer.Name} {customer.Surname}"
-                             };
+                               };
 
-    return appointmentDetails.ToList();
-        }
+      return appointmentDetails.ToList();
     }
+
+    public List<AppointmentForWorkerDto> GetAppointmentForWorker(int workerId)
+    {
+      var appointmentDetails = (from appointment in _context.Appointments
+                                join time in _context.AvaliableTimes on appointment.AvaliableTimeId equals time.Id
+                                join workerProcess in _context.WorkerProcesses on time.WorkerProcessId equals workerProcess.Id
+                                join process in _context.Processes on workerProcess.ProcessId equals process.Id
+                                join customer in _context.Customers on appointment.CustomerId equals customer.Id
+                                where workerProcess.WorkerId == workerId
+                                select new AppointmentForWorkerDto
+                                {
+                                  AppointmentId = appointment.Id,
+                                  AvaliableTimeId = time.Id,
+                                  ProcessName = process.Name,
+                                  CustomerFullName = $"{customer.Name} {customer.Surname}",
+                                  Time = time.Time,
+                                  EndTime = time.EndTime,
+                                  IsApproved = appointment.IsApproved,
+                                  WorkerProcessId = workerProcess.Id
+                                }).ToList();
+
+      return appointmentDetails;
+    }
+  }
 }

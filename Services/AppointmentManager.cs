@@ -76,23 +76,54 @@ namespace Services
       return _manager.Appointment.GetAppointmentsByCustomerId(customerId);
     }
 
-        public IEnumerable<AppointmentDto> GetAppointmentDetails()
-        {
-            return _manager.Appointment.GetAppointmentDetails();
-        }
+    public IEnumerable<AppointmentDto> GetAppointmentDetails()
+    {
+      return _manager.Appointment.GetAppointmentDetails();
+    }
 
-        public bool DeleteAppointment(int appointmentId)
-        {
-          var appointment = _manager.Appointment.GetAppointment(appointmentId, false);
-          var avaliableTime = _manager.AvaliableTime.GetAvaliableTime(appointment.AvaliableTimeId, false);
+    public bool DeleteAppointment(int appointmentId)
+    {
+      var appointment = _manager.Appointment.GetAppointment(appointmentId, false);
+      var avaliableTime = _manager.AvaliableTime.GetAvaliableTime(appointment.AvaliableTimeId, false);
 
-          if(appointment == null) {
-            return false;
-          }
-          _manager.Appointment.DeleteAppointment(appointment);
+      if (appointment == null)
+      {
+        return false;
+      }
+      _manager.Appointment.DeleteAppointment(appointment);
+      avaliableTime.IsAvaliable = 1;
+      _manager.AvaliableTime.UpdateAvaliableTime(avaliableTime);
+      return true;
+    }
+
+    public List<AppointmentForWorkerDto> GetAppointmentForWorkers(int workerId)
+    {
+      return _manager.Appointment.GetAppointmentForWorker(workerId);
+    }
+
+    public void ApproveAppointment(int appointmentId)
+    {
+      var appointment = _manager.Appointment.GetAppointment(appointmentId, false);
+      if(appointment != null) {
+        appointment.IsApproved = 1;
+        _manager.Appointment.UpdateAppointment(appointment);
+      }
+    }
+
+    public void RejectAppointment(int appointmentId)
+    {
+      var appointment = _manager.Appointment.GetAppointment(appointmentId, false);
+      if(appointment != null) {
+        
+        var avaliableTime = _manager.AvaliableTime.GetAvaliableTime(appointment.AvaliableTimeId, false);
+
+        if(avaliableTime != null) {
           avaliableTime.IsAvaliable = 1;
           _manager.AvaliableTime.UpdateAvaliableTime(avaliableTime);
-          return true;
         }
+
+        _manager.Appointment.DeleteAppointment(appointment);
+      }
     }
+  }
 }

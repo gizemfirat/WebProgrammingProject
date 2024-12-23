@@ -50,10 +50,11 @@
                 <a asp-controller="Appointment" asp-action="MyAppointments" class="header-link">My Appointments</a>
             </div>
         }
-         @if (Context.Session.GetInt32("workerId") is not null)
+        @if (Context.Session.GetInt32("workerId") is not null)
         {
             <div class="header-item">
-                <a asp-controller="Appointment" asp-action="Appointments" class="header-link">Appointments</a>
+                <a asp-controller="Appointment" asp-action="AssignedAppointments" class="header-link">
+                    Assigned Appointments</a>
             </div>
         }
         @if (User.IsInRole("Admin"))
@@ -62,11 +63,16 @@
                 <div class="dropdown">
                     <button class="dropdown-btn">Panel</button>
                     <div class="dropdown-content">
-                        <a asp-action="GetWorkers" asp-controller="Admin" class="header-link u-margin-bottom-2">Employees</a>
-                        <a asp-action="GetProfessions" asp-controller="Admin" class="header-link u-margin-bottom-2">Professions</a>
-                        <a asp-action="GetProcesses" asp-controller="Admin" class="header-link u-margin-bottom-2">Processes</a>
-                        <a asp-action="GetAvaliableTimes" asp-controller="Admin" class="header-link u-margin-bottom-2">Avaliable Times</a>
-                        <a asp-action="GetAppointments" asp-controller="Admin" class="header-link u-margin-bottom-2">Appointments</a>
+                        <a asp-action="GetWorkers" asp-controller="Admin"
+                            class="header-link u-margin-bottom-2">Employees</a>
+                        <a asp-action="GetProfessions" asp-controller="Admin"
+                            class="header-link u-margin-bottom-2">Professions</a>
+                        <a asp-action="GetProcesses" asp-controller="Admin"
+                            class="header-link u-margin-bottom-2">Processes</a>
+                        <a asp-action="GetAvaliableTimes" asp-controller="Admin"
+                            class="header-link u-margin-bottom-2">Avaliable Times</a>
+                        <a asp-action="GetAppointments" asp-controller="Admin"
+                            class="header-link u-margin-bottom-2">Appointments</a>
                         <a asp-action="GetCustomers" asp-controller="Admin" class="header-link">Customers</a>
                     </div>
                 </div>
@@ -77,7 +83,8 @@
         </div>
         <div class="header-login-item">
             <img src="/img/circle-user.png" alt="menu-item-3" class="header-login-logo" />
-            @if (User.Identity.IsAuthenticated || Context.Session.GetInt32("customerId") is not null || Context.Session.GetInt32("workerId") is not null)
+            @if (User.Identity.IsAuthenticated || Context.Session.GetInt32("customerId") is not null ||
+            Context.Session.GetInt32("workerId") is not null)
             {
                 <form asp-controller="Account" asp-action="Logout" method="post">
                     <button type="submit" class="btn btn-link">Logout</button>
