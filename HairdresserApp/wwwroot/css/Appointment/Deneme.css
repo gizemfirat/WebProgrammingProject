@@ -1,9 +1,101 @@
 #calendar {
-  width: 60%;
+  width: 80%;
   margin:0 auto;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--color-black);
 }
 
+.fc{
+  position: relative;
+  z-index: 1;
+}
+
+.section-calendar {
+  z-index: 1;
+}
 .fc-toolbar-title {
-  font-size: 2.4rem;
+  font-size: 1.8rem;
+  color: var(--color-black);
+}
+
+.fc-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.fc-event-title {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.fc-event {
+  padding: 0.3rem 0.5rem;
+  background-color: var(--color-fourth);
+  color: var(--color-tertiary-light);
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-fourth);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all .4s;
+
+  &:hover {
+    color: var(--color-tertiary-light);
+    background-color: var(--color-fourth-darkest);
+  }
+}
+
+.fc-event-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.fc-timegrid-slot-label {
+  font-size: 1.3rem;
+
+}
+
+.fc-event-time {
+  display: none;
+}
+
+.fc-timegrid-event {
+  padding: 0.2rem;
+}
+
+.fc-scrollgrid{
+  border-radius: 10px;
+}
+
+.fc-event-main-frame {
+  flex-direction: column;
+}
+
+.fc-event-main-title {
+  font-size: 1.2rem;
+}
+
+.fc-col-header-cell-cushion {
+  color: var(--color-tertiary-light);
+
+  &:hover {
+    color: var(--color-black);
+  }
+}
+
+@media (max-width: 768px) {
+  #calendar {
+    font-size: 0.9rem;
+    width: 95%;
+  }
+
+  .fc-toolbar-title {
+    font-size: 1.4rem;
+  }
+
+  .fc-event-title {
+    font-size: 0.9rem;
+  }
 }

@@ -14,12 +14,15 @@
   flex-direction: column;
   justify-content:space-between;
   align-items: center;
-  width: 17%;
   background-color: none;
+  padding: 2rem;
   border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 35rem;
+  overflow: hidden;
   border: 1px solid var(--color-fourth-dark);
   overflow: hidden;
-  transition: all .3s;
+  transition: all .6s;
 
   &:hover {
     transform: translateY(-2rem);
@@ -44,6 +47,7 @@
 
 .process-card-title {
   text-align: center;
+  padding: 1rem;
 }
 
 .process-card-description {

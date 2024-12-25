@@ -1,26 +1,35 @@
 .section-services {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(min-content, 50%) minmax(50rem, 70%);
   grid-template-rows: min-content 1fr;
+  justify-items: center;
+  margin-top: 1rem;
+  height: auto;
 }
 
 .section-item {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  grid-row: 2 /span 1;
-  grid-column: 1 / -1;
-  align-items: center;
+  grid-row: 1 /-1;
+  grid-column: 2 / -1;
 }
 
 
 .card-item {
-  width: 50%;
-  padding: 0 1.5rem;
+  width: 100%;
+  padding: 0 1.5rem; 
 }
 
+
 .heading-services {
-  text-align: left;
+  text-align: center;
+  grid-column: 1 / span 1;
+  grid-row:  1 / -1;
+  padding: 3rem;
+  justify-self: center;
+  align-self: center;
+  margin-top: -4rem;
 }
 
 .heading-service {

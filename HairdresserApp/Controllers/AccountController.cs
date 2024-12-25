@@ -45,14 +45,36 @@ namespace HairdresserApp.Controllers
             ModelState.AddModelError(string.Empty, "Unvalid Login Attempt.");
             return View(model);
           }
+          else
+          {
 
-          HttpContext.Session.SetInt32("workerId", worker.Id);
-          return RedirectToAction("Index", "Home");
+            if (worker.Email == model.Email && worker.Password == model.Password)
+            {
+              HttpContext.Session.SetInt32("workerId", worker.Id);
+              return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+              ModelState.AddModelError(string.Empty, "Unvalid Login Attempt.");
+              return View(model);
+            }
+          }
         }
+        else
+        {
 
-        HttpContext.Session.SetInt32("customerId", customer.Id);
-        return RedirectToAction("Index", "Home");
+          if (customer.Email == model.Email && customer.Password == model.Password)
+          {
 
+            HttpContext.Session.SetInt32("customerId", customer.Id);
+            return RedirectToAction("Index", "Home");
+          }
+          else
+          {
+            ModelState.AddModelError(string.Empty, "Unvalid Login Attempt.");
+            return View(model);
+          }
+        }
       }
 
       var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);

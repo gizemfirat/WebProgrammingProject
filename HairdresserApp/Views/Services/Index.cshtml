@@ -1,7 +1,11 @@
 @model IEnumerable<Entities.Models.Profession>
 
 <div class="section-services">
-    <h2 class="heading-service">Our Services</h2>
+    <div class="heading-services">
+        <h2 class="heading-service u-margin-bottom-2">Our Services</h2>
+        <p class="paragraph desc">The times and prices shown on our site for our services are fixed prices, and additional charges may be made depending on the type of transaction applied. If you have any problems, please contact us.</p>
+    </div>
+
 
     <div class="section-item">
         @foreach (var profession in Model)

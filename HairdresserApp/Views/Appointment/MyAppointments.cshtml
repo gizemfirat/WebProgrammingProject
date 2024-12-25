@@ -1,12 +1,13 @@
 @model IEnumerable<Entities.ViewModels.AppointmentDetailDto>
 
-<h1>My Appointments</h1>
 
-<table class="table">
+<div class="section-myappointments">
+  <h5 class="heading-fifth u-margin-bottom-2">My Appointments</h5>
+  <table class="table">
     <thead>
         <tr>
             <th>Process Name</th>
-            <th>Worker Name</th>
+            <th>Employee Name</th>
             <th>Date</th>
             <th>Time</th>
             <th>Price</th>
@@ -31,6 +32,7 @@
         }
     </tbody>
 </table>
+</div>
 
 <script>
   let deleteAppointmentId;

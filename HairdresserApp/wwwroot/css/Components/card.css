@@ -1,5 +1,5 @@
 .card {
-  width: 95rem;
+  width: 80rem;
   display: grid;
   grid-template-columns: max-content 40rem max-content;
   grid-template-rows: max-content max-content;

@@ -15,20 +15,20 @@
     <div id="calendar"></div>
 
     <div id="bookingModal" class="modal">
-    <div class="modal-content">
+      <div class="modal-content">
         <div class="modal-header">
-            <span class="close-button" onclick="clodeModal()">x</span>
-            <h2 class="heading-fifth">Confirm Booking</h2>
+          <span class="close-button" onclick="closeModal()">x</span>
+          <h2 class="heading-fifth">Confirm Booking</h2>
         </div>
         <div class="modal-body u-margin-bottom-2">
-            <p id="modal-details"></p>
+          <p id="modal-details" class="paragraph big"></p>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-outlined" ondblclick="closeModal()">Cancel</button>
-            <button class="btn btn-primary" id="confirmButton">Book</button>
+          <button class="btn btn-outlined" onclick="closeModal()">Cancel</button>
+          <button class="btn btn-primary" id="confirmButton">Book</button>
         </div>
+      </div>
     </div>
-</div>
 
   </div>
 
@@ -47,11 +47,11 @@
       })));
 
       var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
+        initialView: 'timeGridWeek',
         locale: 'tr',
         events: events,
         eventClick: function (arg) {
-          openModal(arg.event.id);
+          openModal(arg.event);
         }
       });
       calendar.render();
@@ -59,40 +59,44 @@
   </script>
   <script>
     function bookAppointment(avaliableTimeId) {
-        fetch(`/api/Appointment/BookAppointment`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ avaliableTimeId: avaliableTimeId })
+      fetch(`/api/Appointment/BookAppointment`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ avaliableTimeId: avaliableTimeId })
+      })
+        .then(async response => {
+          if (response.ok) {
+            alert("Appointment successfully booked!");
+            location.reload();
+          } else {
+            const errorMessage = await response.text();
+            console.error("Error:", errorMessage);
+            alert("Failed to book the appointment: " + errorMessage);
+          }
         })
-            .then(async response => {
-                if (response.ok) {
-                    alert("Appointment successfully booked!");
-                    location.reload();
-                } else {
-                    const errorMessage = await response.text();
-                    console.error("Error:", errorMessage);
-                    alert("Failed to book the appointment: " + errorMessage);
-                }
-            })
-            .catch(error => {
-                console.error("Fetch error:", error);
-                alert("An error occurred while booking the appointment.");
-            });
+        .catch(error => {
+          console.error("Fetch error:", error);
+          alert("An error occurred while booking the appointment.");
+        });
     }
 
-    function openModal(avaliableTimeId) {
-        console.log("openModal called with avaliableTimeId:", avaliableTimeId);
-        document.getElementById("modal-details").textContent = "Are you sure you want to make an appointment?";
-        document.getElementById("confirmButton").onclick = function () {
-            bookAppointment(avaliableTimeId);
-        };
-        document.getElementById("bookingModal").style.display = "block";
+    function openModal(event) {
+      document.getElementById("modal-details").innerHTML = `
+            <strong>Process - Employee:</strong> ${event.title}<br>
+            <strong>Start:</strong> ${event.start.toLocaleString()}<br>
+            <strong>End:</strong> ${event.end ? event.end.toLocaleString() : 'Belirtilmedi'}<br>
+            <strong>Price:</strong> ${event.extendedProps.description}
+        `;
+      document.getElementById("confirmButton").onclick = function () {
+        bookAppointment(event.id);
+      };
+      document.getElementById("bookingModal").style.display = "block";
     }
 
     function closeModal() {
-        document.getElementById("bookingModal").style.display = "none";
+      document.getElementById("bookingModal").style.display = "none";
     }
-</script>
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js"></script>
 </body>

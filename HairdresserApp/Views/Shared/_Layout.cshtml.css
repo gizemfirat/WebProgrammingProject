@@ -33,9 +33,12 @@
 }
 
 .footer {
-  grid-row: 2 / span 1;
-  display: flex;
-  align-content: center;
+  background-color: var(--color-fourth);
+  color: var(--color-tertiary-light);
+  padding: 2rem 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 
 .footer-item {
@@ -50,8 +53,10 @@
 
 .content {
   margin-top: 10rem;
-  padding: 3rem;
+  padding: 4rem;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: max-content 5rem;
+  margin-bottom: 2rem;
+  height: 80%;
 }
