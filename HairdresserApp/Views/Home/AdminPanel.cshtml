@@ -1,1 +1,8 @@
-<h2> BURAYI SADECE ADMİN GÖREBİLİR</h2>
+@if(User.IsInRole("Admin")) {
+  <div class="u-center-text">
+    <h5 class="heading-fifth">
+      Welcome, @User.Identity.Name !
+    </h5>
+    <p class="paragraph big">Please click 'Panel' to edit/change/delete</p>
+  </div>
+}
