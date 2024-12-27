@@ -8,7 +8,8 @@ namespace HairdresserApp.Controllers
   {
     private readonly IServiceManager _manager;
 
-    public AvaliableTimeController(IServiceManager manager) {
+    public AvaliableTimeController(IServiceManager manager)
+    {
       _manager = manager;
     }
 
@@ -18,6 +19,11 @@ namespace HairdresserApp.Controllers
       if (request == null || !ModelState.IsValid)
       {
         return BadRequest("Invalid Data");
+      }
+
+      if (_manager.AvaliableTimeService.HasTimeConflict(request.WorkerProcessId, request.Time, request.EndTime))
+      {
+        return BadRequest("The selected time period conflicts with another time for this worker.");
       }
 
       _manager.AvaliableTimeService.AddAvaliableTime(request);
@@ -33,12 +39,19 @@ namespace HairdresserApp.Controllers
       }
 
       var existingAvaliableTime = _manager.AvaliableTimeService.GetAvaliableTime(request.Id, false);
-      if(existingAvaliableTime == null) {
+      if (existingAvaliableTime == null)
+      {
         return NotFound("AvaliableTime not found!");
       }
 
-      if(existingAvaliableTime.IsAvaliable == 0) {
+      if (existingAvaliableTime.IsAvaliable == 0)
+      {
         return BadRequest("You can't update this time because there's an appointment with this time.");
+      }
+
+      if (_manager.AvaliableTimeService.HasTimeConflict(request.WorkerProcessId, request.Time, request.EndTime, request.Id))
+      {
+        return BadRequest("The selected time period conflicts with another time for this worker.");
       }
 
       existingAvaliableTime.Time = request.Time;
@@ -46,15 +59,17 @@ namespace HairdresserApp.Controllers
       existingAvaliableTime.WorkerProcessId = request.WorkerProcessId;
 
       _manager.AvaliableTimeService.UpdateAvaliableTime(existingAvaliableTime);
-      return Ok(new {message = "Avaliable Time updated succesfully"});
+      return Ok(new { message = "Avaliable Time updated succesfully" });
     }
 
     [HttpDelete("/AvaliableTime/Delete/{avaliableTimeId}")]
-    public IActionResult Delete(int avaliableTimeId) {
+    public IActionResult Delete(int avaliableTimeId)
+    {
 
       var avaliableTime = _manager.AvaliableTimeService.GetAvaliableTime(avaliableTimeId, false);
 
-      if(avaliableTime.IsAvaliable == 0) {
+      if (avaliableTime.IsAvaliable == 0)
+      {
         return BadRequest(new
         {
           message = "There's an appointment with this time. Please delete this appointment first."
@@ -62,7 +77,7 @@ namespace HairdresserApp.Controllers
       }
 
       _manager.AvaliableTimeService.DeleteAvaliableTime(avaliableTime);
-      return Ok(new {message= "Avaliable Time deleted successfully"});
+      return Ok(new { message = "Avaliable Time deleted successfully" });
     }
   }
 }

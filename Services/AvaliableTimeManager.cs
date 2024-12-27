@@ -57,5 +57,10 @@ namespace Services
     {
       return _manager.AvaliableTime.GetAvaliableTimeDetails();
     }
+
+    public bool HasTimeConflict(int workerProcessId, DateTime startTime, DateTime endTime, int? excludeId = null)
+    {
+      return _manager.AvaliableTime.HasTimeConflict(workerProcessId, startTime, endTime, excludeId);
+    }
   }
 }

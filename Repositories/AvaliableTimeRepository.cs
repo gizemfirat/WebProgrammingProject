@@ -107,5 +107,28 @@ namespace Repositories
 
       return result;
     }
+
+    public bool HasTimeConflict(int workerProcessId, DateTime startTime, DateTime endTime, int? excludeId = null)
+    {
+      var workerId = _context.WorkerProcesses
+      .Where(wp => wp.Id == workerProcessId)
+      .Select(wp => wp.WorkerId)
+      .FirstOrDefault();
+
+      if (workerId == 0)
+      {
+        return false;
+      }
+
+      var conflictingTimes = (from at in _context.AvaliableTimes
+                              join wp in _context.WorkerProcesses on at.WorkerProcessId equals wp.Id
+                              where wp.WorkerId == workerId
+                                    && at.IsAvaliable == 1
+                                    && (at.EndTime > startTime && at.Time < endTime)
+                                    && (excludeId == null || at.Id != excludeId)
+                              select at).Any();
+
+      return conflictingTimes;
+    }
   }
 }

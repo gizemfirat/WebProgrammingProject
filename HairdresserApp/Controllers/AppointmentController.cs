@@ -46,14 +46,29 @@ namespace HairdresserApp.Controllers
         return Unauthorized();
       }
 
-      var success = _manager.AppointmentService.SaveAppointment(request.AvaliableTimeId, (int)customerId);
-
-      if (!success)
+      try
       {
-        return BadRequest("You cannot make an appointment because you have another appointment during this time interval.");
+        var success = _manager.AppointmentService.SaveAppointment(request.AvaliableTimeId, (int)customerId);
+
+        if (!success)
+        {
+          return BadRequest("You cannot make an appointment because you have another appointment during this time interval.");
+        }
+
+        return Ok("Appointment successfully created.");
+
+      }
+      catch (InvalidOperationException ex)
+      {
+        return BadRequest(ex.Message);
+      }
+      catch (Exception)
+      {
+        return StatusCode(500, "An error occured.");
       }
 
-      return Ok("Appointment successfully created.");
+
+
     }
 
     public IActionResult Deneme(int processId)
@@ -89,13 +104,15 @@ namespace HairdresserApp.Controllers
     }
 
     [HttpPost("/Appointment/Approve/{selectedAppointmentId}")]
-    public IActionResult Approve(int selectedAppointmentId) {
+    public IActionResult Approve(int selectedAppointmentId)
+    {
       _manager.AppointmentService.ApproveAppointment(selectedAppointmentId);
       return Ok();
     }
 
     [HttpPost("/Appointment/Reject/{selectedAppointmentId}")]
-    public IActionResult Reject(int selectedAppointmentId) {
+    public IActionResult Reject(int selectedAppointmentId)
+    {
       _manager.AppointmentService.RejectAppointment(selectedAppointmentId);
       return Ok();
     }

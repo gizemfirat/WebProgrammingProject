@@ -74,9 +74,14 @@ namespace Repositories
       bool isConflict = custumerAppointments.Any(existingTime =>
            avaliableTime.Time < existingTime.EndTime && avaliableTime.EndTime > existingTime.Time);
 
-      if(isConflict)
+      if (isConflict)
       {
         return false;
+      }
+
+      if (avaliableTime.Time < DateTime.Now)
+      {
+        throw new InvalidOperationException("You cannot make an appointment for a past date.");
       }
 
       var appointment = new Appointment

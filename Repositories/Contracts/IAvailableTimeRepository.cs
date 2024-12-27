@@ -15,5 +15,6 @@ namespace Repositories.Contracts
      IEnumerable<AvaliableTimeDto> GetAvaliableTimesByWorkerId(int workerId);
     List<ProcessDetailViewModel> GetAvaliableTimesForProcess(int processId);
     List<AvaliableTimeViewModel> GetAvaliableTimeDetails();
+    bool HasTimeConflict(int workerProcessId, DateTime startTime, DateTime endTime, int? excludeId = null);
   }
 }

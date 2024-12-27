@@ -13,5 +13,6 @@ namespace Services.Contracts
     IEnumerable<AvaliableTimeDto> GetAvaliableiTimesByWorker(int workerId);
     List<ProcessDetailViewModel> GetAvaliableTimesByProcess(int processId);
     List<AvaliableTimeViewModel> GetAvaliableTimeDetails();
+    bool HasTimeConflict(int workerProcessId, DateTime startTime, DateTime endTime, int? excludeId = null);
   }
 }
