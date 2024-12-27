@@ -4,6 +4,12 @@
 
 <div class="home">
     <div class="home-heading">
+            @if (TempData["msj"] != null)
+{
+    <div class="alert alert-danger u-center-text">
+        <p class="paragraph big">@TempData["msj"]</p>
+    </div>
+}
         <h2 class="heading-secondary">Myst Hairdressing</h2>
         <h3 class="heading-tertiary">feel beautiful</h3>
         <div class="heading-box u-margin-top-10">

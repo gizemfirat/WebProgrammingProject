@@ -43,7 +43,7 @@ namespace HairdresserApp.Controllers
           if (worker == null)
           {
             ModelState.AddModelError(string.Empty, "Unvalid Login Attempt.");
-            TempData["msj"] = "Email or password is incorrect. Please try again.";
+            TempData["errormsj"] = "Email or password is incorrect. Please try again.";
             return View(model);
           }
           else
@@ -58,7 +58,7 @@ namespace HairdresserApp.Controllers
             else
             {
               ModelState.AddModelError(string.Empty, "Unvalid Login Attempt.");
-              TempData["msj"] = "Email or password is incorrect. Please try again.";
+              TempData["errormsj"] = "Email or password is incorrect. Please try again.";
               return View(model);
             }
           }
@@ -70,13 +70,14 @@ namespace HairdresserApp.Controllers
           {
 
             HttpContext.Session.SetInt32("customerId", customer.Id);
-            TempData["msj"] = "Welcome!";
+            
+            TempData["msj"] = "Welcome, " + customer.Name + "!";
             return RedirectToAction("Index", "Home");
           }
           else
           {
             ModelState.AddModelError(string.Empty, "Unvalid Login Attempt.");
-            TempData["msj"] = "Email or password is incorrect. Please try again.";
+            TempData["errormsj"] = "Email or password is incorrect. Please try again.";
             return View(model);
           }
         }
@@ -112,6 +113,7 @@ namespace HairdresserApp.Controllers
     {
       HttpContext.Session.Clear();
       await _signInManager.SignOutAsync();
+      TempData["msj"] = "Logged out successfully, have a nice day!";
       return RedirectToAction("Index", "Home");
     }
   }

@@ -22,7 +22,7 @@
         @if(appointment.IsApproved == 0) {
           <td>Not Approved</td>
           <td>
-            <button class="btn btn-primary open-modal-button" data-id="@appointment.AppointmentId" data-action="approve">Approve</button>
+            <button class="btn btn-primary open-modal-button u-margin-bottom-small" data-id="@appointment.AppointmentId" data-action="approve">Approve</button>
       <button class="btn btn-outlined open-modal-button" data-id="@appointment.AppointmentId" data-action="reject">Reject</button>
           </td>
         } else {
@@ -37,11 +37,11 @@
 <div id="actionModal" class="modal" data-id="">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 id="modalTitle">Action Confirmation</h5>
+      <h5 class="heading-fifth" id="modalTitle">Action Confirmation</h5>
       <span class="close-button" id="closeModalButton">&times;</span>
     </div>
     <div class="modal-body">
-      <p id="modalMessage">Are you sure you want to proceed?</p>
+      <p class="paragraph big" id="modalMessage">Are you sure you want to proceed?</p>
     </div>
     <div class="modal-footer">
       <button type="button" id="cancelButton" class="btn btn-outlined">Cancel</button>

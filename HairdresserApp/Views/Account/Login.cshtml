@@ -1,10 +1,17 @@
 @model LoginViewModel
 
+
 <div class="section-login">
   <div class="section-cover">
     <img src="/img/cover-3.jpeg" alt="cover-3" class="section-cover-img" />
   </div>
   <div class="login-content">
+    @if (TempData["errormsj"] != null)
+{
+    <div class="alert alert-danger u-center-text">
+        <p class="paragraph big">@TempData["errormsj"]</p>
+    </div>
+}
     <form asp-action="Login" method="post" class="login-form">
       <img src="/img/picpeople-filled.png" alt="login-logo" class="login-logo" />
       <div class="login-form-group">
