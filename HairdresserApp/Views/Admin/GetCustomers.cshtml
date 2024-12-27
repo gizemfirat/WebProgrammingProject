@@ -57,13 +57,29 @@
         </div>
         <div class="form-group">
           <label for="Password" class="form-label">Password</label>
-          <input type="text" id="Password" name="Password" class="form-input" />
+          <input type="password" id="Password" name="Password" class="form-input" />
         </div>
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Add</button>
       </div>
     </form>
+  </div>
+</div>
+
+<div id="delete-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <div class="modal-header">
+      <h3 class="heading-fifth">Confirm Action</h3>
+    </div>
+    <div class="modal-body">
+      <p class="paragraph big">Are you sure you want to delete this?</p>
+    </div>
+    <div class="modal-footer">
+      <button id="cancel-button" class="btn btn-outlined">Cancel</button>
+      <button id="confirm-delete-button" class="btn btn-primary">Delete</button>
+    </div>
   </div>
 </div>
 
@@ -156,29 +172,61 @@
   });
 
 </script>
+
 <script>
+  const deleteModal = document.getElementById('delete-modal');
+  const closeButton = document.querySelector('.close-button');
+  const cancelButton = document.getElementById('cancel-button');
+  const confirmDeleteButton = document.getElementById('confirm-delete-button');
+  let customerIdToDelete = null;
+
   const deleteButtons = document.querySelectorAll('.delete-button');
+
+
+  const openDeleteModal = (id) => {
+    customerIdToDelete = id;
+    deleteModal.style.display = 'block';
+  };
+
+
+  const closeDeleteModal = () => {
+    customerIdToDelete = null;
+    deleteModal.style.display = 'none';
+  };
 
   deleteButtons.forEach(button => {
     button.addEventListener('click', () => {
       const id = button.getAttribute('data-id');
-      const confirmDelete = confirm("Are you sure you want to delete this customer? All appointments will be deleted along with the customer.");
-      if (!confirm) return;
-
-      fetch(`/Customer/DeleteCustomer/${id}`, {
-        method: 'DELETE',
-      })
-        .then(response => {
-          if (response.ok) {
-            alert("Customer deleted successfully!");
-            location.reload();
-          } else {
-            return response.text().then((text) => {
-              alert(`Error: ${text}`);
-            });
-          }
-        })
-        .catch(error => console.error('Error:', error));
+      openDeleteModal(id);
     });
+  });
+
+  closeButton.addEventListener('click', closeDeleteModal);
+  cancelButton.addEventListener('click', closeDeleteModal);
+
+  confirmDeleteButton.addEventListener('click', () => {
+    if (!customerIdToDelete) return;
+
+    fetch(`/Customer/DeleteCustomer/${customerIdToDelete}`, {
+      method: 'DELETE',
+    })
+    .then(response => {
+      if (response.ok) {
+        alert("Customer deleted successfully!");
+        location.reload();
+      } else {
+        return response.text().then((text) => {
+          alert(`Error: ${text}`);
+        });
+      }
+    })
+    .catch(error => console.error('Error:', error))
+    .finally(closeDeleteModal);
+  });
+
+  window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      closeDeleteModal();
+    }
   });
 </script>

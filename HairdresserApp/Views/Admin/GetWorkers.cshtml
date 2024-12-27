@@ -86,6 +86,23 @@
   </div>
 </div>
 
+<div id="delete-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <div class="modal-header">
+      <h3 class="heading-fifth">Confirm Action</h3>
+    </div>
+    <div class="modal-body">
+      <p class="paragraph big">Are you sure you want to delete this?</p>
+    </div>
+    <div class="modal-footer">
+      <button id="cancel-button" class="btn btn-outlined">Cancel</button>
+      <button id="confirm-delete-button" class="btn btn-primary">Delete</button>
+    </div>
+  </div>
+</div>
+
+
 <script>
   const modal = document.getElementById('createWorkerModal');
   const openModalButton = document.getElementById('openModalButton');
@@ -224,25 +241,59 @@
 </script>
 
 <script>
-  document.querySelectorAll('.delete-button').forEach(button => {
-    button.addEventListener('click', () => {
-      const workerId = button.getAttribute('data-id');
+  const deleteModal = document.getElementById('delete-modal');
+  const closeButton = document.querySelector('.close-button');
+  const cancelButton = document.getElementById('cancel-button');
+  const confirmDeleteButton = document.getElementById('confirm-delete-button');
+  let workerIdToDelete = null;
 
-      if (confirm('Are you sure you want to delete this worker?')) {
-        fetch(`/Worker/Delete/${workerId}`, {
-          method: 'DELETE'
-        })
-          .then(response => response.json())
-          .then(data => {
-            console.log(data);
-            alert(data.message);
-            location.reload();
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            alert('Error occurred while deleting the worker.');
-          });
-      }
+  const deleteButtons = document.querySelectorAll('.delete-button');
+
+
+  const openDeleteModal = (id) => {
+    workerIdToDelete = id;
+    deleteModal.style.display = 'block';
+  };
+
+
+  const closeDeleteModal = () => {
+    workerIdToDelete = null;
+    deleteModal.style.display = 'none';
+  };
+
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const id = button.getAttribute('data-id');
+      openDeleteModal(id);
     });
+  });
+
+  closeButton.addEventListener('click', closeDeleteModal);
+  cancelButton.addEventListener('click', closeDeleteModal);
+
+  confirmDeleteButton.addEventListener('click', () => {
+    if (!workerIdToDelete) return;
+
+    fetch(`/Worker/Delete/${workerIdToDelete}`, {
+      method: 'DELETE',
+    })
+    .then(response => {
+      if (response.ok) {
+        alert("Worker deleted successfully!");
+        location.reload();
+      } else {
+        return response.text().then((text) => {
+          alert(`Error: ${text}`);
+        });
+      }
+    })
+    .catch(error => console.error('Error:', error))
+    .finally(closeDeleteModal);
+  });
+
+  window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      closeDeleteModal();
+    }
   });
 </script>

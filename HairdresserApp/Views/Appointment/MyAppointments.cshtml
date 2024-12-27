@@ -12,6 +12,7 @@
             <th>Time</th>
             <th>Price</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -28,41 +29,103 @@
                 } else {
                   <td>Approved!</td>
                 }
+                <td>
+                   <button class="btn btn-outlined cancel-button" data-id="@appointment.AppointmentId" 
+                    data-process="@appointment.ProcessName" 
+                    data-worker="@appointment.WorkerFullName" 
+                    data-date="@appointment.Date.ToString("yyyy-MM-dd HH:mm")">
+                    Cancel
+                </button>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 </div>
 
+<div id="cancel-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <div class="modal-header">
+      <h3 class="heading-fifth">Confirm Cancellation</h3>
+    </div>
+    <div class="modal-body">
+      <p class="paragraph big">Are you sure you want to cancel the following appointment?</p>
+      <ul>
+        <li class="paragraph big"><strong>Process:</strong> <span id="modal-process-name"></span></li>
+        <li class="paragraph big"><strong>Employee:</strong> <span id="modal-worker-name"></span></li>
+        <li class="paragraph big"><strong>Date:</strong> <span id="modal-date"></span></li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <button id="modal-cancel-button" class="btn btn-outlined">Close</button>
+      <button id="modal-confirm-cancel" class="btn btn-primary">Delete</button>
+    </div>
+  </div>
+</div>
+
 <script>
-  let deleteAppointmentId;
+  const cancelModal = document.getElementById('cancel-modal');
+  const closeButton = document.querySelector('.close-button');
+  const cancelModalButton = document.getElementById('modal-cancel-button');
+  const confirmCancelButton = document.getElementById('modal-confirm-cancel');
+  const modalProcessName = document.getElementById('modal-process-name');
+  const modalWorkerName = document.getElementById('modal-worker-name');
+  const modalDate = document.getElementById('modal-date');
 
-  function openModal(appointmentId, date, workerName) {
-    deleteAppointmentId = appointmentId;
-    document.getElementById("modal-appointment-details").textContent = "Date: " + date +  ", " + "Worker: " + workerName;
-    document.getElementById("deleteModal").style.display = "block";
-  }
+  let appointmentIdToCancel = null;
 
-  function closeModal() {
-    document.getElementById("deleteModal").style.display = "none";
-  }
+  const cancelButtons = document.querySelectorAll('.cancel-button');
 
-  document.getElementById("confirmDeleteButton").addEventListener("click", async () => {
-    if(!deleteAppointmentId) return;
+  const openCancelModal = (id, process, worker, date) => {
+    appointmentIdToCancel = id;
+    modalProcessName.textContent = process;
+    modalWorkerName.textContent = worker;
+    modalDate.textContent = date;
+    cancelModal.style.display = 'block';
+  };
 
-    try {
-      const response = await fetch(`/api/appointment/${deleteAppointmentId}`, {method: "DELETE"});
-      if(response.ok) {
-        alert("Appointment deleted successfully.");
+  const closeCancelModal = () => {
+    appointmentIdToCancel = null;
+    cancelModal.style.display = 'none';
+  };
+
+  cancelButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const id = button.getAttribute('data-id');
+      const process = button.getAttribute('data-process');
+      const worker = button.getAttribute('data-worker');
+      const date = button.getAttribute('data-date');
+      openCancelModal(id, process, worker, date);
+    });
+  });
+
+  closeButton.addEventListener('click', closeCancelModal);
+  cancelModalButton.addEventListener('click', closeCancelModal);
+
+  confirmCancelButton.addEventListener('click', () => {
+    if (!appointmentIdToCancel) return;
+
+    fetch(`/Appointment/DeleteAppointment/${appointmentIdToCancel}`, {
+      method: 'DELETE',
+    })
+    .then(response => {
+      if (response.ok) {
+        alert("Appointment canceled successfully!");
         location.reload();
       } else {
-        alert("Failed to delete thead appointment.");
+        return response.text().then((text) => {
+          alert(`Error: ${text}`);
+        });
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("An error occured!");
-    }
+    })
+    .catch(error => console.error('Error:', error))
+    .finally(closeCancelModal);
+  });
 
-    closeModal();
+  window.addEventListener('click', (event) => {
+    if (event.target === cancelModal) {
+      closeCancelModal();
+    }
   });
 </script>
