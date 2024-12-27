@@ -52,7 +52,14 @@
         events: events,
         eventClick: function (arg) {
           openModal(arg.event);
-        }
+        },
+        eventOverlap: false,
+        slotEventOverlap: false,
+        eventDisplay: 'block',
+        slotMinTime: "06:00:00",
+        slotMaxTime: "24:00:00",
+        allDaySlot: false,
+        height: 'auto'
       });
       calendar.render();
     });

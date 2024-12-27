@@ -50,7 +50,7 @@ namespace HairdresserApp.Controllers
 
       if (!success)
       {
-        return BadRequest("Appointment could not be created.");
+        return BadRequest("You cannot make an appointment because you have another appointment during this time interval.");
       }
 
       return Ok("Appointment successfully created.");

@@ -62,6 +62,23 @@ namespace Repositories
         return false;
       }
 
+      var custumerAppointments = _context.Appointments
+                                         .Where(a => a.CustomerId == customerId)
+                                         .Join(
+                                          _context.AvaliableTimes,
+                                          appointment => appointment.AvaliableTimeId,
+                                          time => time.Id,
+                                          (appointment, time) => time
+                                         ).ToList();
+
+      bool isConflict = custumerAppointments.Any(existingTime =>
+           avaliableTime.Time < existingTime.EndTime && avaliableTime.EndTime > existingTime.Time);
+
+      if(isConflict)
+      {
+        return false;
+      }
+
       var appointment = new Appointment
       {
         AvaliableTimeId = avaliableTimeId,

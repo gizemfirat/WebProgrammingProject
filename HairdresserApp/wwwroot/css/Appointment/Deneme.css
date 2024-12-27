@@ -29,6 +29,11 @@
 .fc-event-title {
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
+  display: block;
+}
+
+.fc-event-time {
+  display: block;
 }
 
 .fc-event {
@@ -40,6 +45,11 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   cursor: pointer;
   transition: all .4s;
+  white-space: normal;
+  overflow: visible;
+  height: auto;
+  line-height: 1.2;
+  font-size: 1.4rem;
 
   &:hover {
     color: var(--color-tertiary-light);
