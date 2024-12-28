@@ -25,14 +25,14 @@ background-size: calc(320px/4.667) 320px,320px calc(320px/4.667);
   margin-top: 1.6rem;
   height: 15rem;
   justify-self: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .register-form {
   display: grid;
   grid-template-rows: repeat(3, max-content);
   justify-content: center;
-  grid-gap: 2rem;
+  grid-gap: 1.2rem;
   padding: 5rem;
 }
 

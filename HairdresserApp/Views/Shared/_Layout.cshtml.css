@@ -15,6 +15,18 @@
   margin-right: 2rem;
 }
 
+@media (max-width: 900px) {
+  .header-title {
+    font-size: 2rem;
+  }
+}
+
+@media(max-width: 700px) {
+  .header-title {
+    display: none;
+  }
+}
+
 .header-login-logo {
   height: 3rem;
   margin-right: 1rem;
@@ -31,6 +43,14 @@
   margin-right: 3rem;
   display: flex;
   align-items: center;
+
+
+}
+
+@media (max-width: 700px) {
+  .header-login-item {
+    margin-right: 5rem;
+  }
 }
 
 .footer {

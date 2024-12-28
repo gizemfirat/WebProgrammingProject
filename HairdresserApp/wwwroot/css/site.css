@@ -49,6 +49,8 @@ body {
   font-family: 'Poppins', serif;
   font-weight: 400;
   display: grid;
+  align-items: center;
+  min-height: 100vh;
 }
 
 ::selection {

@@ -1,7 +1,7 @@
 @model Entities.ViewModels.RegisterViewModel
 
 <div class="section-register">
-  <div class="register-content u-margin-top-5">
+  <div class="register-content">
     <form asp-action="Register" asp-controller="Register" method="post" class="register-form">
       <img src="/img/picpeople.png" alt="register-logo" class="register-logo" />
       <div class="register-form-group">
@@ -19,6 +19,11 @@
       <div class="register-form-group">
         <label class="register-form-label"> Password </label>
         <input class="register-form-input" type="password" id="Password" asp-for="Password" />
+      </div>
+      <div class="register-form-group">
+        <label class="register-form-label"> Confirm Password </label>
+        <input class="register-form-input" type="password" id="ConfirmPassword" asp-for="ConfirmPassword" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
       </div>
       <div class="register-form-group">
         <button type="submit" class="btn btn-primary">Sign Up</button>

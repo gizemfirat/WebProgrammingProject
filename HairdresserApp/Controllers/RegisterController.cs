@@ -35,10 +35,11 @@ namespace HairdresserApp.Controllers
 
         _manager.CustomerService.AddCustomer(customer);
 
+        TempData["errormsj"] = "Signed up successfully, please log in.";
         return RedirectToAction("Login", "Account");
       }
 
-      return View(model);
+      return View("Index", model);
 
     }
   }

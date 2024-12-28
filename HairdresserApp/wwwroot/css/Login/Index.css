@@ -6,6 +6,17 @@
   justify-content: space-around;
 }
 
+@media (max-width: 1400px) {
+  .section-login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .section-cover-img {
+    display: none;
+  }
+}
+
 .section-cover {
 
 }
